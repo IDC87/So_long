@@ -6,13 +6,14 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:08:39 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/07/01 16:10:20 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/07/02 11:41:46 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <time.h>
 
 typedef struct s_vector
 {
@@ -36,14 +37,23 @@ typedef struct s_image
     int         endian;
 } t_image;
 
-int ft_input(int keypressed, t_vars *vars)
+int ft_input(int keycode, t_vars *vars)
 {
     //t_image *img = param;
-    printf("key is:" );
-    
+    if (keycode == 119)
+        printf("KEYPRESSED 'W'\n");
+    else if (keycode == 97)
+        printf("KEYPRESSED 'A'\n");
+    else if (keycode == 115)
+        printf("KEYPRESSED 'S'\n");
+    else if (keycode == 100)
+        printf("KEYPRESSED 'D'\n");
+    else if (keycode == 65293)
+        printf("KEYPRESSED 'ENTER'\n");
+    else
+        printf("%d\n", keycode);    
     return(0);
 }
-
 
 int main()
 {
@@ -66,7 +76,9 @@ int main()
     mlx_put_image_to_window(vars.mlx_init, vars.mlx_window, img.xpm, sprite.x, sprite.y);
     // por o sprite no ecra (a meio)
 
-    mlx_key_hook(vars.mlx_window, ft_input, &vars);
+    mlx_key_hook(vars.mlx_window, &ft_input, &vars);
+    //mlx_loop_hook(vars.mlx_init, &loop_hook_test, &vars);  
+    
     
     mlx_loop(vars.mlx_init);
 
