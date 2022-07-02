@@ -1,0 +1,43 @@
+CONFIGURING MLX in Linux (Ubunt and mint)
+
+This is a simple tutorial i have made from all the other tutorials i saw spread in the internet(mostly from github). With the purpose to guide through the process of working with the Minilibx library in Linux.
+I took too long to have this working so i decided to create a simple one.
+
+1. git clone https://github.com/42Paris/minilibx-linux
+
+ Requirements for Linux
+
+    MinilibX only support TrueColor visual type (8,15,16,24 or 32 bits depth)
+    gcc
+    make
+    X11 include files (package xorg)
+    XShm extension must be present (package libxext-dev)
+    Utility functions from BSD systems - development files (package libbsd-dev)
+
+2. sudo apt-get install libxext-dev libxrandr-dev libx11-dev libbsd-dev libssl-dev
+
+3. cd minilibx-linux
+
+4. ./configure (to run the script and create the minilibx.a(s))
+
+5. Run these commands:
+
+	sudo mv minilibx-linux/man/man1 /usr/local/man/
+	sudo mv minilibx-linux/libmlx.a /usr/local/lib/
+	sudo mv minilibx-linux/mlx.h /usr/local/include/
+
+6. compile example 
+ (clang or gcc) -Wall -Wextra -Werror main.c -lbsd -lmlx -lXext -lX11
+
+ !!you need to have already created a main.c file for this last step to work!!
+
+
+
+ Addtional notes:
+
+ convert .PNG to .XPM
+
+ - sudo convert foo.jpg -geometry 320x240 -colors 216 foo.xpm
+
+      - resolution can be of any choice (for sprites in small windows i choose 44x44)
+      - color deph can be much lower at 64 instead of 216 value at least
