@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:08:39 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/07/14 18:06:12 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/08/08 18:09:45 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ int animated_sprite(t_tudo *tudo)
 
 int keyboard(int keycode, t_tudo *tudo)
 {     
-   //mlx_clear_window(tudo->mlx_init, tudo->mlx_window);  
+   mlx_clear_window(tudo->mlx_init, tudo->mlx_window);  
     
     if (keycode == 119)
     {
@@ -242,7 +242,7 @@ int main()
     tudo.pixels = mlx_get_data_addr(tudo.sprites.xpm1, &tudo.bits_per_pixel, &tudo.line_size, &tudo.endian);
     tudo.position_x = (tudo.tela_x / 2) - (tudo.sapo_x / 2);
     tudo.position_y = tudo.tela_y / 2 - (tudo.sapo_y / 2); 
-     render_fps(&tudo);
+     //render_fps(&tudo);
      
   
     mlx_put_image_to_window(tudo.mlx_init, tudo.mlx_window, tudo.sprites.xpm1, tudo.position_x, tudo.position_y);

@@ -1,0 +1,17 @@
+{
+	"folders": [
+        {
+            "path": ".."
+        },
+        {
+            "path": "../../minitalk"
+        },
+        {
+            "path": "../../so_long_test_version"
+        },
+        {
+            "path": "../../SoLong_test2"
+        }
+    ],
+    "settings": {}
+}

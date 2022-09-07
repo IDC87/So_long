@@ -1,7 +1,7 @@
 CONFIGURING MLX in Linux (Ubunt and mint)
 
 This is a simple tutorial i have made from all the other tutorials i saw spread in the internet(mostly from github). With the purpose to guide through the process of working with the Minilibx library in Linux.
-I took too long to have this working so i decided to create a simple one.
+I took too long to have this working so i decided to create a simpler one.
 
 1. git clone https://github.com/42Paris/minilibx-linux
 
@@ -20,7 +20,9 @@ I took too long to have this working so i decided to create a simple one.
 
 4. ./configure (to run the script and create the minilibx.a(s))
 
-5. Run these commands:
+    4.1 WARNING! if libraries could not be found please run this command:  - sudo apt-get install libc6-dev 
+
+5. Run these commands: (outside of the minilbx folder)
 
 	sudo mv minilibx-linux/man/man1 /usr/local/man/
 	sudo mv minilibx-linux/libmlx.a /usr/local/lib/
