@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:30:09 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/09/07 17:44:18 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/09/08 19:48:46 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,17 +133,32 @@ int keyboard(int keycode, t_tudo *tudo)
     return(0);
 }
 
-/* void read_map(char *filename, t_tudo *tudo)
+ void read_map(char *filename, t_tudo *tudo)
 {
     int fd;
     char *line;
+    int i;
+    int line_len;
 
     fd = open(filename, O_RDONLY);
+    i = 0;
     line = get_next_line(fd);
+    line_len = ft_strlen(line) - 1;
+    printf("line lenght is: %d\n", line_len);
     
-    printf("lina e: %s", line);
-    return (0);
-} */
+    while(line)
+    {
+        line = get_next_line(fd);
+        printf("lina e: %s", line);
+        i++;      
+    }
+
+    printf("\n");
+    printf("map size: [%d][%d]\n", line_len, i);
+    
+    
+   
+} 
 
 
 int main (int argc, char **argv)
@@ -164,7 +179,7 @@ int main (int argc, char **argv)
     mlx_key_hook(tudo.mlx_window, &keyboard, &tudo);
     
     
-    //read_map(argv[1], &tudo);
+    read_map(argv[1], &tudo);
 
     mlx_loop(tudo.mlx_init);
 
