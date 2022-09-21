@@ -12,7 +12,7 @@ SRCS =	Get_next_line/get_next_line.c\
 OBJS =	$(SRCS:.c=.o)
 
 Solong:	$(SRC)
-	$(CC) $(SRCS) $(MLX) && ./a.out map1.ber
+	$(CC) $(SRCS) $(MLX) && ./a.out map2.ber
 
 
  
