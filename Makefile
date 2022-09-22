@@ -2,17 +2,22 @@
 
 CC =	gcc
 
+CFLAGS = -Wall -Wextra -Werror
+
 MLX = -lbsd -lmlx -lXext -lX11
 
-SRCS =	Get_next_line/get_next_line.c\
-		Get_next_line/get_next_line_utils.c\
-		another_version.c\
-	
+SRCS =	utils.c\
+		create_map_sprites.c\
+		loop_map.c\
+		keyboard_logic.c\
+		so_long.c\
+
+MAPS = Maps/map1.ber	
 
 OBJS =	$(SRCS:.c=.o)
 
 Solong:	$(SRC)
-	$(CC) $(SRCS) $(MLX) && ./a.out map2.ber
+	$(CC) $(CFLAGS) $(SRCS) $(MLX) && ./a.out $(MAPS)
 
 
  
