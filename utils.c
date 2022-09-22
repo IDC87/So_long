@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:18:48 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/09/22 16:19:19 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:13:44 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,13 @@ size_t	ft_strlen_long(const char *s)
 }
 
 
-static int	nbr_tokens(char const *s, char delimeter)
+ int	nbr_tokens(char const *s, char delimeter)
 {
 	int	i;
-	int	j;
 	int	len;
 	int	token_count;
 
 	i = 0;
-	j = 0;
 	len = 0;
 	if (!(*s))
 		return (0);
@@ -47,7 +45,7 @@ static int	nbr_tokens(char const *s, char delimeter)
 	return (token_count);
 }
 
-static char	*token(const char *s, int columns, int index)
+ char	*token(const char *s, int columns, int index)
 {
 	char	*token;
 	int		i;

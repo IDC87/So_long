@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:41:16 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/09/22 16:41:44 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:14:06 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,9 @@ void loop_grid(t_tudo *tudo)
 {
     int i;
     int j;
-    int k;
 
     i = 0;
     j = 0;
-    k = 0;
 
     if (tudo->grid.collectible_total == 0)
         tudo->grid.map_grid[tudo->indexs.exit_i][tudo->indexs.exit_j] = 'F';
@@ -56,7 +54,6 @@ void loop_grid(t_tudo *tudo)
             {
                 tudo->indexs.i = i; 
                 tudo->indexs.j = j;
-                exit;
             } 
             j++;
         }       

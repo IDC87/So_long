@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:12:20 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/09/22 16:45:15 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:12:32 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ typedef struct s_tudo
 }   t_tudo;
 
 size_t	ft_strlen_long(const char *s);
-static int	nbr_tokens(char const *s, char delimeter);
-static char	*token(const char *s, int columns, int index);
+int	nbr_tokens(char const *s, char delimeter);
+char	*token(const char *s, int columns, int index);
 char	**words_divider(char const *s, char **words, char delimeter, int len);
 char	**ft_split(char const *s, char delimeter);
 

@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:30:43 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/09/22 16:35:11 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:15:08 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int main (int argc, char **argv)
 {
     t_tudo tudo;
 
+    if (argc == 2 )
     create_map(argv[1], &tudo.grid);
 
     tudo.tela_x =  tudo.grid.width * 44;
