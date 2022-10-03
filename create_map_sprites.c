@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   another_version.c                                  :+:      :+:    :+:   */
+/*   create_map_sprites.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:30:09 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/09/22 16:43:21 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/03 14:22:36 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,14 @@ void create_map(char *filename, t_grid *map)
     int j;
 
     map->width = 0;
-    map->height = 0;
+    map->height = 0;    
     
     map->fd = open(filename, O_RDONLY);
+    if (map->fd == -1)
+        {
+            perror("Error\n");
+            exit(0);            
+        }
     buf = (char *)malloc(sizeof(char) * BUFFER_COUNT);
     bytes_read = read(map->fd, buf, BUFFER_COUNT);
     buf[bytes_read] = '\0';
@@ -36,13 +41,15 @@ void create_map(char *filename, t_grid *map)
     if (map->width < map->height)
         map->height--;
 
+    not_rect(map);
+
     i = 0;
     j = 0;
     
     printf("\n");    
     
     printf("MAP DIMENSION: [%d] X [%d]\n", map->width, map->height);
-    while(i < map->height)//quando este valor e superior ao width da seg fault
+    while(i < map->height)
     {
         j = 0;
         while(j < map->width)

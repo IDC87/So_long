@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:12:20 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/09/22 17:12:32 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/03 17:51:20 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <errno.h>
 #include<sys/types.h>
 #include<sys/stat.h>
 #include <fcntl.h> 
@@ -62,6 +63,8 @@ typedef struct s_grid
     char **map_grid;
 
     int collectible_total;
+
+    int move_count;
     
 }   t_grid;
 
@@ -72,6 +75,9 @@ typedef struct s_indexs
 
     int exit_i;
     int exit_j;
+
+    int mouse_x;
+    int mouse_y;
 
 }   t_indexs;
 
@@ -132,7 +138,14 @@ char	*token(const char *s, int columns, int index);
 char	**words_divider(char const *s, char **words, char delimeter, int len);
 char	**ft_split(char const *s, char delimeter);
 
+char	*ft_strdup(const char *s);
+int	itoa_size(int n);
+char	*convertion(char *str, int n, int len, int j);
+char	*ft_itoa(int n);
+
 int keyboard(int keycode, t_tudo *tudo);
+void put_string(t_tudo *tudo);
+void mouse_input(t_tudo *tudo);
 int main (int argc, char **argv);
 
 void move_to_the_right(t_tudo *tudo);
@@ -147,5 +160,7 @@ void loop_grid_collectible(t_tudo *tudo);
 void create_map(char *filename, t_grid *map);
 void create_sprites(t_tudo *tudo);
 void insert_sprites(t_tudo *tudo, int i, int j);
+
+void not_rect(t_grid *map);
 
 #endif
