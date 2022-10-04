@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:30:09 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/03 14:22:36 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:06:53 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,10 @@ void create_map(char *filename, t_grid *map)
     if (map->width < map->height)
         map->height--;
 
-    not_rect(map);
-
+    printf("\n");    
     i = 0;
     j = 0;
-    
-    printf("\n");    
-    
-    printf("MAP DIMENSION: [%d] X [%d]\n", map->width, map->height);
+    printf("MAP DIMENSION: Width[%d] X Height[%d]\n", map->width, map->height);
     while(i < map->height)
     {
         j = 0;
@@ -62,6 +58,14 @@ void create_map(char *filename, t_grid *map)
     }
     printf("\n");
     printf("bytes of the file are: %ld\n", bytes_read);
+
+    not_rect(map);
+    check_number_of_sprites(map);
+    loop_surrounded_by_walls(map);
+
+    
+    
+    
     free(buf);
     
 }

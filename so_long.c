@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:30:43 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/03 18:25:55 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/04 11:04:23 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,14 @@ int main (int argc, char **argv)
 {
     t_tudo tudo;
 
+    tudo.grid.collectible_total = 0;
+    tudo.grid.collectible_count = 0;
+    tudo.grid.move_count = 0;
+    tudo.grid.exit_count = 0;
+    tudo.grid.player_count = 0;
+    tudo.indexs.mouse_x = 0;
+    tudo.indexs.mouse_y = 0;
+
     if (argc != 2 )
     {        
         printf("Error\n Map file missing in argument!\n");
@@ -59,10 +67,7 @@ int main (int argc, char **argv)
 
     tudo.tela_x =  tudo.grid.width * 44;
     tudo.tela_y = tudo.grid.height * 44 + 44;
-    tudo.grid.collectible_total = 0;
-    tudo.grid.move_count = 0;
-    tudo.indexs.mouse_x = 0;
-    tudo.indexs.mouse_y = 0;
+    
 
     tudo.mlx_init = mlx_init();
     tudo.mlx_window = mlx_new_window(tudo.mlx_init, tudo.tela_x, tudo.tela_y, "So_long");
@@ -74,10 +79,7 @@ int main (int argc, char **argv)
     //mlx_mouse_hook(tudo.mlx_window, &mouse, &tudo);  to be continued
     
     mlx_key_hook(tudo.mlx_window, &keyboard, &tudo);
-    //mouse_input(&tudo);
-    
-
-     printf("POSIX of EXIT is: %d %d\n", tudo.indexs.exit_i, tudo.indexs.exit_j);  
+    //mouse_input(&tudo); 
     
     mlx_loop(tudo.mlx_init);
 

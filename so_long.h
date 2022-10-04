@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:12:20 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/03 17:51:20 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/04 11:27:00 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ typedef struct s_grid
     char **map_grid;
 
     int collectible_total;
+
+    int collectible_count;
+    int exit_count;
+    int player_count;    
 
     int move_count;
     
@@ -162,5 +166,8 @@ void create_sprites(t_tudo *tudo);
 void insert_sprites(t_tudo *tudo, int i, int j);
 
 void not_rect(t_grid *map);
+void loop_number_of_sprites(t_grid *map);
+void check_number_of_sprites(t_grid *map);
+void loop_surrounded_by_walls(t_grid *map);
 
 #endif

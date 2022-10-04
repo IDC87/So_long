@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:41:16 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/09/24 12:44:36 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/04 10:22:35 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void loop_map_grid(t_tudo *tudo)
     }   
     
 }
-
 
 void loop_grid(t_tudo *tudo)
 {
