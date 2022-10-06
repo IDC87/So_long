@@ -6,11 +6,13 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:37:36 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/03 17:05:23 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/05 11:04:42 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+// the gross code of each of these functions can be put in one function itself
 
 void move_to_the_right(t_tudo *tudo)
 {
@@ -26,6 +28,8 @@ void move_to_the_right(t_tudo *tudo)
         tudo->grid.map_grid[tudo->indexs.i][tudo->indexs.j] = '0';
                 
     }
+    if (tudo->grid.collectible_total == 0)
+        tudo->grid.map_grid[tudo->indexs.exit_i][tudo->indexs.exit_j] = 'F';
     loop_map_grid(tudo);
 }
 
@@ -43,6 +47,8 @@ void move_to_the_left(t_tudo *tudo)
         tudo->grid.map_grid[tudo->indexs.i][tudo->indexs.j] = '0';  
               
     }
+    if (tudo->grid.collectible_total == 0)
+        tudo->grid.map_grid[tudo->indexs.exit_i][tudo->indexs.exit_j] = 'F';
     loop_map_grid(tudo);
 }
 
@@ -60,6 +66,8 @@ void move_up(t_tudo *tudo)
         tudo->grid.map_grid[tudo->indexs.i][tudo->indexs.j] = '0';
                 
     }
+    if (tudo->grid.collectible_total == 0)
+        tudo->grid.map_grid[tudo->indexs.exit_i][tudo->indexs.exit_j] = 'F';
     loop_map_grid(tudo);
 }
 
@@ -78,5 +86,7 @@ void move_down(t_tudo *tudo)
         tudo->grid.map_grid[tudo->indexs.i][tudo->indexs.j] = '0';
                
     }
+    if (tudo->grid.collectible_total == 0)
+        tudo->grid.map_grid[tudo->indexs.exit_i][tudo->indexs.exit_j] = 'F';
     loop_map_grid(tudo);
 }

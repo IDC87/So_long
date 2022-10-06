@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:30:43 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/04 11:04:23 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/05 12:47:50 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int keyboard(int keycode, t_tudo *tudo)
             exit(0); 
         
     return(0);
-
     
 }
 
@@ -75,6 +74,8 @@ int main (int argc, char **argv)
     loop_grid_collectible(&tudo);
     create_sprites(&tudo);       
     loop_map_grid(&tudo); 
+
+    
      
     //mlx_mouse_hook(tudo.mlx_window, &mouse, &tudo);  to be continued
     

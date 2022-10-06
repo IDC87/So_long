@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:30:09 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/04 12:06:53 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/06 17:05:20 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void create_map(char *filename, t_grid *map)
     if (map->width < map->height)
         map->height--;
 
+    free(buf);
+
     printf("\n");    
     i = 0;
     j = 0;
@@ -62,11 +64,8 @@ void create_map(char *filename, t_grid *map)
     not_rect(map);
     check_number_of_sprites(map);
     loop_surrounded_by_walls(map);
-
-    
-    
-    
-    free(buf);
+     
+   // check_valid_path(map);    
     
 }
 
