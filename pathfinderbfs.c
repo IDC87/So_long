@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:12:11 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/15 00:54:08 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/16 17:37:03 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,18 +173,9 @@ void check_valid_path(char **grid_map, int sr, int sc, int R, int C)
      count = 0;  
 
     
-     while (i < size_of_queue - 1)
-    {
-        rq[i] = 0;
-        cq[i] = 0;
-        i++;
-    }   
+     
        printf("starting row and col %d %d\n", sr, sc);
-       printf("Queue count %d\n", count);
-       printf("RQ[0] is %d\n", rq[0]);
-       printf("RQ[6] is %d\n", rq[6]);
-       printf("CQ[7] is %d\n", cq[7]);
-       printf("RQ[1] is %d\n", rq[1]);
+       
     enqueue(sr, sc);
     printf("RQ[0] is %d\n", rq[0]);
     i = 0;
@@ -195,15 +186,14 @@ void check_valid_path(char **grid_map, int sr, int sc, int R, int C)
 
     printf("move count %d\n", size_of_queue);
     int j = 0;
-    while (j < 15 ) //size_of_queue > 0
+    while (j < (R  * C)) //size_of_queue > 0
     {
-        dequeue();
-        printf("move count %d\n", size_of_queue);
         r = rq[0];
         c = cq[0];
+        dequeue();
         if (grid_map[r][c] == 'E')
         {
-            printf("EXIT FOUND");
+            printf("EXIT FOUND in coordinate r[%d] c[%d]", r, c);
             break;
         }
         
@@ -213,13 +203,15 @@ void check_valid_path(char **grid_map, int sr, int sc, int R, int C)
         {
             rr = r + dr[i];
             cc = c + dc[i];
-            enqueue(rr, cc);
+            
             if ((rr > 0 || cc > 0) && (rr <= R || cc <= C))
             {
                 if (grid_map[rr][cc] != '1' && grid_map[rr][cc] != 'V')
-                {                    
+                {    
+                    enqueue(rr, cc);  
+                    if (grid_map[rr][cc] == 'E')
+                        break;              
                     grid_map[rr][cc] = 'V';
-                    printf("chegou a este checkpoint\n");
                     nodes_left_next_layer++;
                 }                
             }
