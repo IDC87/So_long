@@ -20,7 +20,7 @@ MAPS = Maps/map2.ber
 OBJS =	$(SRCS:.c=.o)
 
 Solong:	$(SRC)
-	$(CC) $(CFLAGS) $(SRCS) $(MLX) 
+	$(CC)  $(SRCS) $(MLX) 
 
 
  

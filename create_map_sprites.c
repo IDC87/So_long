@@ -6,13 +6,13 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:30:09 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/06 17:05:20 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/14 17:56:52 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void create_map(char *filename, t_grid *map)
+void create_map(char *filename, t_tudo *tudo)
 {
     size_t bytes_read;
     char *buf;
@@ -20,39 +20,40 @@ void create_map(char *filename, t_grid *map)
     int i;
     int j;
 
-    map->width = 0;
-    map->height = 0;    
+    tudo->grid.width = 0;
+    tudo->grid.height = 0;    
     
-    map->fd = open(filename, O_RDONLY);
-    if (map->fd == -1)
+    tudo->grid.fd = open(filename, O_RDONLY);
+    if (tudo->grid.fd == -1)
         {
             perror("Error\n");
             exit(0);            
         }
     buf = (char *)malloc(sizeof(char) * BUFFER_COUNT);
-    bytes_read = read(map->fd, buf, BUFFER_COUNT);
+    bytes_read = read(tudo->grid.fd, buf, BUFFER_COUNT);
     buf[bytes_read] = '\0';
 
-    map->map_grid = ft_split(buf, '\n');
-    map->width = ft_strlen_long(map->map_grid[0]);
+    tudo->grid.map_grid = ft_split(buf, '\n');
+    tudo->grid.temp_grid = ft_split(buf, '\n');
+    tudo->grid.width = ft_strlen_long(tudo->grid.map_grid[0]);
 
-    map->height = bytes_read / map->width; 
+    tudo->grid.height = bytes_read / tudo->grid.width; 
 
-    if (map->width < map->height)
-        map->height--;
+    if (tudo->grid.width < tudo->grid.height)
+        tudo->grid.height--;
 
     free(buf);
 
     printf("\n");    
     i = 0;
     j = 0;
-    printf("MAP DIMENSION: Width[%d] X Height[%d]\n", map->width, map->height);
-    while(i < map->height)
+    printf("MAP DIMENSION: Width[%d] X Height[%d]\n", tudo->grid.width, tudo->grid.height);
+    while(i < tudo->grid.height)
     {
         j = 0;
-        while(j < map->width)
+        while(j < tudo->grid.width)
         {
-            printf("[%c]", map->map_grid[i][j]);
+            printf("[%c]", tudo->grid.map_grid[i][j]);
             j++;
         }
         printf("\n");
@@ -61,11 +62,17 @@ void create_map(char *filename, t_grid *map)
     printf("\n");
     printf("bytes of the file are: %ld\n", bytes_read);
 
-    not_rect(map);
-    check_number_of_sprites(map);
-    loop_surrounded_by_walls(map);
-     
-   // check_valid_path(map);    
+    
+
+    not_rect(tudo);
+    check_number_of_sprites(tudo);
+    loop_surrounded_by_walls(tudo);
+
+    
+    
+    printf("SIZE OF QUEUE: %d\n", tudo->queue.size_of_queue);
+    check_valid_path(tudo);
+      
     
 }
 

@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:30:43 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/05 12:47:50 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/14 12:24:51 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int main (int argc, char **argv)
     tudo.grid.move_count = 0;
     tudo.grid.exit_count = 0;
     tudo.grid.player_count = 0;
+    tudo.grid.empty_spaces = 0;
     tudo.indexs.mouse_x = 0;
     tudo.indexs.mouse_y = 0;
 
@@ -61,7 +62,7 @@ int main (int argc, char **argv)
         exit(-1);        
     }
     else
-        create_map(argv[1], &tudo.grid);
+        create_map(argv[1], &tudo);
         
 
     tudo.tela_x =  tudo.grid.width * 44;

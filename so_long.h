@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:12:20 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/05 12:50:52 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/14 17:50:59 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 #define LIGHT_GREY 0xd3d3d3
 #define GOLD 0xffd700
 #define RED 0xf90808
+
+//#define LIST_QUEUE 20
 
 /* #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600 */
@@ -61,16 +63,30 @@ typedef struct s_grid
 
     char *new_line;
     char **map_grid;
+    char **temp_grid;
 
     int collectible_total;
 
     int collectible_count;
     int exit_count;
-    int player_count;    
+    int player_count;
+    int empty_spaces;   
 
     int move_count;
     
 }   t_grid;
+
+typedef struct s_queue
+{
+    int front;
+    int rear;
+    int count;
+    int size_of_queue;
+    int *rq;
+    int *cq;
+    
+    
+}   t_queue;
 
 typedef struct s_indexs
 {
@@ -79,6 +95,9 @@ typedef struct s_indexs
 
     int exit_i;
     int exit_j;
+
+    int player_start_i;
+    int player_start_j; 
 
     int mouse_x;
     int mouse_y;
@@ -121,7 +140,8 @@ typedef struct s_tudo
     t_img   img;
 
     t_indexs indexs;
-   
+
+    t_queue queue;   
     
     int tela_x;
     int tela_y;
@@ -161,14 +181,16 @@ void loop_map_grid(t_tudo *tudo);
 void loop_grid(t_tudo *tudo);
 void loop_grid_collectible(t_tudo *tudo);
 
-void create_map(char *filename, t_grid *map);
+void create_map(char *filename, t_tudo *tudo);
 void create_sprites(t_tudo *tudo);
 void insert_sprites(t_tudo *tudo, int i, int j);
 
-void not_rect(t_grid *map);
-void loop_number_of_sprites(t_grid *map);
-void check_number_of_sprites(t_grid *map);
-void loop_surrounded_by_walls(t_grid *map);
-void check_valid_path(t_grid *map);
+void not_rect(t_tudo *tudo);
+void loop_number_of_sprites(t_tudo *tudo);
+void check_number_of_sprites(t_tudo *tudo);
+void loop_surrounded_by_walls(t_tudo *tudo);
+void enqueue(t_tudo *tudo, int r, int c);
+void dequeue(t_tudo *tudo);
+void check_valid_path(t_tudo *tudo);
 
 #endif
