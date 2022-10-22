@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:45:56 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/04 10:16:19 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:09:10 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void put_string(t_tudo *tudo)
     GOLD, "Number of moves:");
     mlx_string_put(tudo->mlx_init, tudo->mlx_window, tudo->grid.width + 110, tudo->grid.height * 44 + 22, 
     GOLD, ft_itoa(tudo->grid.move_count)); 
+
+    
 
     
 }

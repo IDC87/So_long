@@ -11,6 +11,18 @@
         },
         {
             "path": "../../SoLong_test2"
+        },
+        {
+            "path": "../../so_long-xinoca"
+        },
+        {
+            "path": "../../so_long_megaPro"
+        },
+        {
+            "path": "../../radixdlt-scrypto"
+        },
+        {
+            "path": "../../scrypto-demos"
         }
     ],
     "settings": {}

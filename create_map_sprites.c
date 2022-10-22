@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:30:09 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/14 17:56:52 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/19 21:35:23 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,64 +16,34 @@ void create_map(char *filename, t_tudo *tudo)
 {
     size_t bytes_read;
     char *buf;
-    
-    int i;
-    int j;
+    int fd;
 
     tudo->grid.width = 0;
     tudo->grid.height = 0;    
     
-    tudo->grid.fd = open(filename, O_RDONLY);
-    if (tudo->grid.fd == -1)
+    fd = open(filename, O_RDONLY);
+    if (fd == -1)
         {
             perror("Error\n");
             exit(0);            
         }
     buf = (char *)malloc(sizeof(char) * BUFFER_COUNT);
-    bytes_read = read(tudo->grid.fd, buf, BUFFER_COUNT);
-    buf[bytes_read] = '\0';
-
+    bytes_read = read(fd, buf, BUFFER_COUNT);
+    if (bytes_read <= 0)
+	    free(buf);
+    buf[bytes_read] = '\0';    
     tudo->grid.map_grid = ft_split(buf, '\n');
-    tudo->grid.temp_grid = ft_split(buf, '\n');
-    tudo->grid.width = ft_strlen_long(tudo->grid.map_grid[0]);
-
-    tudo->grid.height = bytes_read / tudo->grid.width; 
-
-    if (tudo->grid.width < tudo->grid.height)
-        tudo->grid.height--;
-
+    
     free(buf);
-
-    printf("\n");    
-    i = 0;
-    j = 0;
-    printf("MAP DIMENSION: Width[%d] X Height[%d]\n", tudo->grid.width, tudo->grid.height);
-    while(i < tudo->grid.height)
-    {
-        j = 0;
-        while(j < tudo->grid.width)
-        {
-            printf("[%c]", tudo->grid.map_grid[i][j]);
-            j++;
-        }
-        printf("\n");
-        i++;
-    }
-    printf("\n");
-    printf("bytes of the file are: %ld\n", bytes_read);
-
+    close(fd);
+    tudo->grid.width = ft_strlen_long(tudo->grid.map_grid[0]);
+    tudo->grid.height = bytes_read / tudo->grid.width;
+    if (tudo->grid.width < tudo->grid.height)
+        tudo->grid.height--;    
     
-
-    not_rect(tudo);
-    check_number_of_sprites(tudo);
-    loop_surrounded_by_walls(tudo);
-
-    
-    
-    printf("SIZE OF QUEUE: %d\n", tudo->queue.size_of_queue);
-    check_valid_path(tudo);
-      
-    
+    //not_rect(tudo);
+    //check_number_of_sprites(tudo);
+    //loop_surrounded_by_walls(tudo);    
 }
 
 void create_sprites(t_tudo *tudo)

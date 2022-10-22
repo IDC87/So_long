@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:12:11 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/16 17:37:03 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:18:43 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,34 +157,20 @@ void check_valid_path(char **grid_map, int sr, int sc, int R, int C)
     int rr = 0;
     int cc = 0;  
 
-    int r;
+    int r; // can be replaced by the sr and sc variables
     int c;
 
     int dr[4] = {-1, 1, 0, 0}; 
-    int dc[4] = {0, 0, 1, -1}; //direction vectors for adjacent cells
-
-    
+    int dc[4] = {0, 0, 1, -1}; //direction vectors for adjacent cells    
 
     int move_count = 0;
     int nodes_left_in_layer = 1;
-    int nodes_left_next_layer = 0;     
-
-     int i = 0;
-     count = 0;  
-
-    
-     
-       printf("starting row and col %d %d\n", sr, sc);
+    int nodes_in_next_layer = 0; 
+    int i = 0;
+     count = 0; 
        
     enqueue(sr, sc);
-    printf("RQ[0] is %d\n", rq[0]);
-    i = 0;
-
     grid_map[sr][sc] = 'V'; // fills the map with V of visited
-
-    printf("V is: %c\n", grid_map[1][6]);
-
-    printf("move count %d\n", size_of_queue);
     int j = 0;
     while (j < (R  * C)) //size_of_queue > 0
     {
@@ -193,7 +179,7 @@ void check_valid_path(char **grid_map, int sr, int sc, int R, int C)
         dequeue();
         if (grid_map[r][c] == 'E')
         {
-            printf("EXIT FOUND in coordinate r[%d] c[%d]", r, c);
+            printf("EXIT FOUND in coordinate r[%d] c[%d]\n\n", r, c);
             break;
         }
         
@@ -212,7 +198,7 @@ void check_valid_path(char **grid_map, int sr, int sc, int R, int C)
                     if (grid_map[rr][cc] == 'E')
                         break;              
                     grid_map[rr][cc] = 'V';
-                    nodes_left_next_layer++;
+                    nodes_in_next_layer++;
                 }                
             }
             i++;  
@@ -221,10 +207,9 @@ void check_valid_path(char **grid_map, int sr, int sc, int R, int C)
         nodes_left_in_layer--;
         if (nodes_left_in_layer == 0)
         {
-            nodes_left_in_layer = nodes_left_next_layer;
-            nodes_left_next_layer = 0;
+            nodes_left_in_layer = nodes_in_next_layer;
+            nodes_in_next_layer = 0;
             move_count++;
-            printf("MOVE COUNT %d\n", move_count);
         } 
         j++;      
            
@@ -254,7 +239,7 @@ int main (int arcg, char **argv)
 
     free(buf);
 
-    check_valid_path(grid_map, 4, 3, 7, 8);
+    check_valid_path(grid_map, 4, 9, 10, 21);
     
     return 0;
 }

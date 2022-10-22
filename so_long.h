@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:12:20 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/14 17:50:59 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/19 21:36:09 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 #include <fcntl.h> 
 
 #define X_EVENT_KEY_PRESS 3
-#define X_EVENT_KEY_EXIT 0
+//#define X_EVENT_KEY_EXIT 0
+#define X_EVENT_KEY_EXIT 17
 
 #define LIGHT_GREY 0xd3d3d3
 #define GOLD 0xffd700
@@ -34,7 +35,7 @@
 /* #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600 */
 
-#define BUFFER_COUNT 5000
+#define BUFFER_COUNT 219
 
 #define sapinho "./sprites_Solong/player_64px.xpm"
 #define grass "./sprites_Solong/grass_64px.xpm"
@@ -59,11 +60,8 @@ typedef struct s_grid
 {
     int width;
     int height;
-    int fd;
-
-    char *new_line;
+    
     char **map_grid;
-    char **temp_grid;
 
     int collectible_total;
 
@@ -76,17 +74,6 @@ typedef struct s_grid
     
 }   t_grid;
 
-typedef struct s_queue
-{
-    int front;
-    int rear;
-    int count;
-    int size_of_queue;
-    int *rq;
-    int *cq;
-    
-    
-}   t_queue;
 
 typedef struct s_indexs
 {
@@ -99,26 +86,10 @@ typedef struct s_indexs
     int player_start_i;
     int player_start_j; 
 
-    int mouse_x;
-    int mouse_y;
-
 }   t_indexs;
 
 
-typedef struct s_img
-{
-    void        *mlx_img;
-    char        *pixels;
-    int         bits_per_pixel;
-    int         line_size;
-    int         endian;
-    
-    int         squareX;
-    int         squareY;
-    
-}   t_img;
-
-typedef struct s_rect
+/* typedef struct s_rect
 {
     int x;
     int y;
@@ -128,7 +99,7 @@ typedef struct s_rect
 
     int color;
     
-}   t_rect;
+}   t_rect; */
 
 typedef struct s_tudo
 {
@@ -137,11 +108,8 @@ typedef struct s_tudo
 
     t_sprites sprites;
 
-    t_img   img;
 
-    t_indexs indexs;
-
-    t_queue queue;   
+    t_indexs indexs; 
     
     int tela_x;
     int tela_y;
@@ -182,6 +150,7 @@ void loop_grid(t_tudo *tudo);
 void loop_grid_collectible(t_tudo *tudo);
 
 void create_map(char *filename, t_tudo *tudo);
+int exit_game(t_tudo *tudo);
 void create_sprites(t_tudo *tudo);
 void insert_sprites(t_tudo *tudo, int i, int j);
 

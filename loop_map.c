@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:41:16 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/05 13:10:02 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/19 21:38:24 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,6 @@ void loop_grid(t_tudo *tudo)
 
     i = 0;
     j = 0;
-
-    // condition that tranforms the exit when all collectibles are collected
-    /* if (tudo->grid.collectible_total == 0)
-        tudo->grid.map_grid[tudo->indexs.exit_i][tudo->indexs.exit_j] = 'F'; */
-    //ERASE THIS PART IF EVERYTHING CHECKS OUT
     
     while(i < tudo->grid.height)
     {
