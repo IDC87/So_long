@@ -8,6 +8,8 @@ CFLAGS = -Wall -Wextra -Werror
 
 MLX = -lbsd -lmlx -lXext -lX11
 
+MLX_42 = -L./minilibx-linux -lbsd -lmlx -lXext -lX11
+
 SRCS =	utils.c\
 		utils_2.c\
 		create_map_sprites.c\
@@ -32,7 +34,7 @@ compile:
 	rm -rf valgrind-out.txt
 
 Solong:	compile $(SRC)
-	 $(CC) -g -std=c11 $(CFLAGS) -ggdb3 $(SRCS) $(MLX) && valgrind $(valgrind) ./a.out $(MAPS)
+	 $(CC) -g -std=c11 $(CFLAGS) -ggdb3 $(SRCS) $(MLX_42) && valgrind $(valgrind) ./a.out $(MAPS)
 
 
  

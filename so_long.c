@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:30:43 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/19 21:37:16 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/22 19:51:42 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,45 @@ int keyboard(int keycode, t_tudo *tudo)
     else if (keycode == 100) //TECLA D
         move_to_the_right(tudo); 
     else if (keycode == 65307) //TECLA ESCAPE
-            exit(0);         
+            exit_game(tudo);        
     return(0);
     
 }
 
+/* void	terminate(t_imgdata *data)
+{
+	mlx_destroy_image();
+    mlx_destroy_image();
+	mlx_clear_window();
+    mlx_destroy_display();
+	free_2d(data->map);
+	free(data->bigass);
+	exit(1);
+} */
+
 int exit_game(t_tudo *tudo)
 {
+    mlx_clear_window(tudo->mlx_init, tudo->mlx_window);
     mlx_destroy_display(tudo->mlx_init);
+    free_map(tudo->grid.map_grid);
 	exit(0);
+}
+
+void free_map(char **map)
+{
+    while (*map)
+    {
+        free(*map);
+        map++;
+    }
 }
 
 int main (int argc, char **argv)
 {
     t_tudo *tudo; 
+    t_map map;
+    int window_x;
+    int window_y;
 
      tudo = malloc(sizeof(t_tudo));  
      
@@ -49,7 +74,7 @@ int main (int argc, char **argv)
         exit(-1);        
     }
     else    
-        create_map(argv[1], tudo);   
+        create_map(argv[1], &map);   
 
     tudo->grid.collectible_total = 0;
     tudo->grid.collectible_count = 0;
@@ -58,11 +83,11 @@ int main (int argc, char **argv)
     tudo->grid.player_count = 0;
     tudo->grid.empty_spaces = 0;
 
-    tudo->tela_x =  tudo->grid.width * 44;
-    tudo->tela_y = tudo->grid.height * 44 + 44;
+    window_x = tudo->grid.width * SPRITE_RES_X_Y;
+    window_y = tudo->grid.height * SPRITE_RES_X_Y + SPRITE_RES_X_Y;
 
     tudo->mlx_init = mlx_init();
-    tudo->mlx_window = mlx_new_window(tudo->mlx_init, tudo->tela_x, tudo->tela_y, "So_long");
+    tudo->mlx_window = mlx_new_window(tudo->mlx_init, window_x, window_y, "So_long");
 
     loop_grid_collectible(tudo);
     create_sprites(tudo);       

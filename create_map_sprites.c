@@ -6,20 +6,21 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:30:09 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/19 21:35:23 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/22 19:48:55 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void create_map(char *filename, t_tudo *tudo)
+void create_map(char *filename, t_map *map)
 {
     size_t bytes_read;
     char *buf;
     int fd;
 
-    tudo->grid.width = 0;
-    tudo->grid.height = 0;    
+
+    map->height = 0;
+    map->width = 0;    
     
     fd = open(filename, O_RDONLY);
     if (fd == -1)
@@ -32,19 +33,46 @@ void create_map(char *filename, t_tudo *tudo)
     if (bytes_read <= 0)
 	    free(buf);
     buf[bytes_read] = '\0';    
-    tudo->grid.map_grid = ft_split(buf, '\n');
+    map->full_map = ft_split(buf, '\n');
     
     free(buf);
     close(fd);
-    tudo->grid.width = ft_strlen_long(tudo->grid.map_grid[0]);
-    tudo->grid.height = bytes_read / tudo->grid.width;
-    if (tudo->grid.width < tudo->grid.height)
-        tudo->grid.height--;    
+    map->width = ft_strlen_long(map->full_map[0]);
+    map->height  = bytes_read / map->width;
+    if (map->width < map->height )
+        map->height --;    
+        
     
     //not_rect(tudo);
     //check_number_of_sprites(tudo);
-    //loop_surrounded_by_walls(tudo);    
+    //loop_surrounded_by_walls(tudo);  
+     
 }
+
+/* char	*read_file(int32_t fd)
+{
+	int32_t	buflen;
+	char	*line;
+	char	*buf;
+
+	buflen = 1;
+	line = ft_calloc(1, 1);
+	buf = malloc(BUFFERSIZE + 1 * sizeof(char));
+	while (buflen > 0)
+	{
+		buflen = read(fd, buf, BUFFERSIZE);
+		if (buflen <= 0)
+			free (buf);
+		if (buflen == 0)
+			return (line);
+		if (buflen < 0)
+			return (NULL);
+		buf[buflen] = '\0';
+		line = gnl_strjoin(line, buf);
+	}
+	close(fd);
+	return (line);
+} */
 
 void create_sprites(t_tudo *tudo)
 {

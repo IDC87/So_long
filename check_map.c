@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 12:47:22 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/19 21:59:55 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/22 18:06:59 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,7 @@ void not_rect(t_tudo *tudo)
     
 }
 
-/* void	terminate(t_imgdata *data)
-{
-	mlx_destroy_image();
-    mlx_destroy_image();
-	mlx_clear_window();
-    mlx_destroy_display();
-	free_2d(data->map);
-	free(data->bigass);
-	exit(1);
-} */
+
 
 void loop_surrounded_by_walls(t_tudo *tudo)
  {  

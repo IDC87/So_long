@@ -6,14 +6,14 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:12:20 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/19 21:36:09 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/22 19:51:27 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 #define SO_LONG_H 
 
-#include <mlx.h>
+#include "./minilibx-linux/mlx.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -25,6 +25,7 @@
 #define X_EVENT_KEY_PRESS 3
 //#define X_EVENT_KEY_EXIT 0
 #define X_EVENT_KEY_EXIT 17
+#define SPRITE_RES_X_Y 44
 
 #define LIGHT_GREY 0xd3d3d3
 #define GOLD 0xffd700
@@ -35,7 +36,7 @@
 /* #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600 */
 
-#define BUFFER_COUNT 219
+#define BUFFER_COUNT 500
 
 #define sapinho "./sprites_Solong/player_64px.xpm"
 #define grass "./sprites_Solong/grass_64px.xpm"
@@ -45,8 +46,7 @@
 #define polluted_lake "./sprites_Solong/lake_polluted.xpm"
 
 typedef struct s_sprites
-{
-    
+{    
     void *sapo1;
     void *grass1;
     void *wall1;
@@ -101,6 +101,14 @@ typedef struct s_indexs
     
 }   t_rect; */
 
+typedef struct s_map
+{
+    int height;
+    int width;
+    char **full_map;
+    
+}   t_map;
+
 typedef struct s_tudo
 {
     void *mlx_init;
@@ -108,14 +116,9 @@ typedef struct s_tudo
 
     t_sprites sprites;
 
+    t_map map;
 
     t_indexs indexs; 
-    
-    int tela_x;
-    int tela_y;
-    
-    int position_x;
-    int position_y;
 
     t_grid grid;
 
@@ -149,8 +152,9 @@ void loop_map_grid(t_tudo *tudo);
 void loop_grid(t_tudo *tudo);
 void loop_grid_collectible(t_tudo *tudo);
 
-void create_map(char *filename, t_tudo *tudo);
+void create_map(char *filename, t_map *map);
 int exit_game(t_tudo *tudo);
+void free_map(char **map);
 void create_sprites(t_tudo *tudo);
 void insert_sprites(t_tudo *tudo, int i, int j);
 

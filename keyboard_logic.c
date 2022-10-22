@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:37:36 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/19 18:21:15 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/22 18:24:24 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ void move_to_the_right(t_tudo *tudo)
         tudo->grid.move_count++;
         put_string(tudo);
         if (tudo->grid.map_grid[tudo->indexs.i][tudo->indexs.j + 1] == 'F')
-            {
-                mlx_destroy_display(tudo->mlx_init);
-                exit(0);
-            }
+            exit_game(tudo);
         if(tudo->grid.map_grid[tudo->indexs.i][tudo->indexs.j + 1] == 'C')
             tudo->grid.collectible_total--;            
         tudo->grid.map_grid[tudo->indexs.i][tudo->indexs.j + 1] = 'P';
@@ -47,10 +44,7 @@ void move_to_the_left(t_tudo *tudo)
         tudo->grid.move_count++;
         put_string(tudo);
         if (tudo->grid.map_grid[tudo->indexs.i][tudo->indexs.j - 1] == 'F')
-            {
-                mlx_destroy_display(tudo->mlx_init);
-                exit(0);
-            }
+            exit_game(tudo);
         if(tudo->grid.map_grid[tudo->indexs.i][tudo->indexs.j - 1] == 'C')
             tudo->grid.collectible_total--;
         tudo->grid.map_grid[tudo->indexs.i][tudo->indexs.j - 1] = 'P';
@@ -71,10 +65,7 @@ void move_up(t_tudo *tudo)
         tudo->grid.move_count++;
         put_string(tudo);
         if (tudo->grid.map_grid[tudo->indexs.i - 1][tudo->indexs.j] == 'F')
-            {
-                mlx_destroy_display(tudo->mlx_init);
-                exit(0);
-            }
+            exit_game(tudo);
         if(tudo->grid.map_grid[tudo->indexs.i - 1][tudo->indexs.j] == 'C')
             tudo->grid.collectible_total--;
         tudo->grid.map_grid[tudo->indexs.i - 1][tudo->indexs.j] = 'P';
@@ -95,10 +86,7 @@ void move_down(t_tudo *tudo)
         tudo->grid.move_count++;
         put_string(tudo); 
         if (tudo->grid.map_grid[tudo->indexs.i + 1][tudo->indexs.j] == 'F')
-            {
-                mlx_destroy_display(tudo->mlx_init);
-                exit(0);
-            }        
+            exit_game(tudo);
         if(tudo->grid.map_grid[tudo->indexs.i + 1][tudo->indexs.j] == 'C')
             tudo->grid.collectible_total--;
         tudo->grid.map_grid[tudo->indexs.i + 1][tudo->indexs.j] = 'P';
