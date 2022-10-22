@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:12:20 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/22 19:51:27 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/22 19:58:36 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 //#define X_EVENT_KEY_EXIT 0
 #define X_EVENT_KEY_EXIT 17
 #define SPRITE_RES_X_Y 44
+#define SOMETHING 000000
 
 #define LIGHT_GREY 0xd3d3d3
 #define GOLD 0xffd700
