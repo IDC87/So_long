@@ -6,24 +6,32 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 12:47:22 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/22 18:06:59 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/25 23:09:51 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void not_rect(t_tudo *tudo)
+void error(char *text)
 {
-    if  (tudo->grid.width == tudo->grid.height)
-    {
-        printf("ERROR\n Map cannot be a square!\n");
-        exit(0);
-    }
-    
+    printf("ERROR\n");
+    printf("%s", text);
+    exit(0);
 }
 
+void check_map(t_tudo *tudo)
+{
+    not_rect(tudo);
+    check_number_of_sprites(tudo);
+    loop_surrounded_by_walls(tudo); 
+}
 
-
+void not_rect(t_tudo *tudo)
+{
+    if  (tudo->map.width == tudo->map.height)
+        error("Map cannot be a square!\n");
+    
+}
 void loop_surrounded_by_walls(t_tudo *tudo)
  {  
     int i;
@@ -32,58 +40,15 @@ void loop_surrounded_by_walls(t_tudo *tudo)
     i = 0;
     j = 0;
     
-    while(i < tudo->grid.height)
-    {   
-        
+    while(i < tudo->map.height)
+    {         
         j = 0;
-        if  (tudo->grid.map_grid[i][0] != '1' || tudo->grid.map_grid[i][tudo->grid.width - 1] != '1')
+        if  (tudo->map.full_map[i][0] != '1' || tudo->map.full_map[i][tudo->map.width - 1] != '1')
+         error("Map must be surrounded by walls\n");        
+        while(j < tudo->map.width)
         {
-            printf("ERROR\n Map must be surrounded by walls\n");
-            exit(0);
-        }
-        
-        while(j < tudo->grid.width)
-        {
-            if  (tudo->grid.map_grid[0][j] != '1' || tudo->grid.map_grid[tudo->grid.height - 1][j] != '1')
-            {
-                printf("ERROR\n Map must be surrounded by walls\n");
-                exit(0);
-            }            
-            j++;
-        }
-        i++;
-    }
-}
-
-void loop_number_of_sprites(t_tudo *tudo)
-{
-    int i;
-    int j;
-    
-    i = 0;
-    j = 0;
-    
-    while(i < tudo->grid.height)
-    {
-        j = 0;
-        while(j < tudo->grid.width)
-        {
-            if (tudo->grid.map_grid[i][j] == 'E')
-            {
-                tudo->indexs.exit_i = i;
-                tudo->indexs.exit_j = j;
-                tudo->grid.exit_count++;
-            }
-            else if (tudo->grid.map_grid[i][j] == 'P')
-            {
-                tudo->indexs.player_start_i = i;
-                tudo->indexs.player_start_j = j;
-                tudo->grid.player_count++;
-            }
-            else if (tudo->grid.map_grid[i][j] == 'C')
-                tudo->grid.collectible_count++;
-            else if (tudo->grid.map_grid[i][j] == '0')
-                tudo->grid.empty_spaces++;
+            if  (tudo->map.full_map[0][j] != '1' || tudo->map.full_map[tudo->map.height - 1][j] != '1')
+                error("Map must be surrounded by walls\n");   
             j++;
         }
         i++;
@@ -93,23 +58,34 @@ void loop_number_of_sprites(t_tudo *tudo)
 void check_number_of_sprites(t_tudo *tudo)
 {
     loop_number_of_sprites(tudo);
+    loop_grid(tudo);
     
-    if (tudo->grid.exit_count != 1)
-    {
-      printf("ERROR\n Wrong number of Exits\n");
-      mlx_destroy_display(tudo->mlx_init);
-        exit(0);  
-    }
-    if (tudo->grid.player_count != 1)
-    {
-      printf("ERROR\n Must have 1 Player start\n");
-        exit(0);  
-    }
-    if (tudo->grid.collectible_count < 1)
-    {
-      printf("ERROR\n Must have at least one collectible\n");
-        exit(0);  
-    }
+    if (tudo->exit_count != 1)
+      error("Wrong number of Exits\n");    
+    if (tudo->player_count != 1)
+      error("Must have 1 Player start\n");
+    if (tudo->collectible_count == 0)
+      error("Must have at least one collectible\n");
+}
+
+int	valid_path(t_tudo *tudo, int i, int j)
+
+{
+	if (tudo->map.full_map[i][j] == 'C' || tudo->map.full_map[i][j] == '0')
+	{
+		if (tudo->map.full_map[i][j] == 'C')
+			tudo->collectible_total--;
+		if (tudo->map.full_map[i][j] == 'E')
+			tudo->exit_count--;
+		tudo->map.full_map[i][j] = 'P';
+		valid_path(tudo, i - 1, j);
+		valid_path(tudo, i + 1, j);
+		valid_path(tudo, i, j + 1);
+		valid_path(tudo, i, j - 1);
+	}
+	if (tudo->collectible_total != 0)
+		return (1);
+	return (0);
 }
 
 /* void enqueue(t_tudo *tudo, int r, int c)
@@ -151,7 +127,7 @@ void check_valid_path(t_tudo *tudo)
    int cc;
     
 
-    tudo->queue.size_of_queue = tudo->grid.empty_spaces + tudo->grid.collectible_count;
+    tudo->queue.size_of_queue = tudo->map.empty_spaces + tudo->grid.collectible_count;
     tudo->queue.rq = (int *)malloc(sizeof(tudo->queue) * (5));
     tudo->queue.cq = (int *)malloc(sizeof(tudo->queue) * (5));
     

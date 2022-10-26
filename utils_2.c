@@ -6,76 +6,93 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:32:39 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/19 19:11:46 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/25 12:33:30 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	*ft_strdup(const char *s)
+int		len(long nb)
 {
-	int		i;
-	char	*str;
+	int		len;
 
-	str = NULL;
-	i = 0;
-	str = (char *)malloc(sizeof(*s) * ft_strlen_long(s) + 1);
-	if (str == NULL)
-		return (NULL);
-	while (s[i] != '\0')
+	len = 0;
+	if (nb < 0)
 	{
-		str[i] = s[i];
+		nb = nb * -1;
+		len++;
+	}
+	while (nb > 0)
+	{
+		nb = nb / 10;
+		len++;
+	}
+	return (len);
+}
+
+char	*ft_itoa(int nb)
+{
+	char *str;
+	long	n;
+	int		i;
+
+	n = nb;
+	i = len(n);
+	if (!(str = (char*)malloc(sizeof(char) * (i + 1))))
+		return (NULL);
+	str[i--] = '\0';
+	if (n == 0)
+	{
+		str[0] = 48;
+		return (str);
+	}
+	if (n < 0)
+	{
+		str[0] = '-';
+		n = n * -1;
+	}
+	while (n > 0)
+	{
+		str[i] = 48 + (n % 10);
+		n = n / 10;
+		i--;
+	}
+	return (str);
+    
+}
+
+char	*ft_strstr(char *str, char *to_find)
+{
+	int i;
+	int j;
+
+	i = 0;
+	if (to_find[0] == '\0')
+		return (str);
+	while (str[i] != '\0')
+	{
+		j = 0;
+		while (str[i + j] != '\0' && str[i + j] == to_find[j])
+		{
+			if (to_find[j + 1] == '\0')
+				return (&str[i]);
+			++j;
+		}
+		++i;
+	}
+	return (0);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+	char	*string;
+
+	string = (char *)s;
+	i = 0;
+	while (i < n)
+	{
+		string[i] = '\0';
 		i++;
 	}
-	str[i] = '\0';
-	return (str);
-}
-
-int	itoa_size(int n)
-{
-	int	size;
-
-	size = 0;
-	if (n == 0)
-		return (1);
-	n = -n;
-	while (n != 0)
-	{
-		n = n / 10;
-		size++;
-	}
-	return (size);
-}
-
-char	*convertion(char *str, int n, int len, int j)
-{
-	while (len-- != j)
-	{
-		str[len] = (n % 10) + '0';
-		n = n / 10;
-	}
-	return (str);
-}
-
-char	*ft_itoa(int n)
-{	
-	int		len;
-	int		j;
-	char	*str;
-
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	j = 0;
-	if (n < 0)
-		j = 1;
-	len = itoa_size(n) + j;
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (str == NULL)
-		return (NULL);
-	if (n < 0)
-		str[0] = '-';
-	str[len] = '\0';
-	n = n * (((n < 0) * -2) + 1);
-	convertion(str, n, len, j);
-	return (str);
 }

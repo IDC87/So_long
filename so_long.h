@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:12:20 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/22 19:58:36 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:12:18 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,10 @@
 #include<sys/stat.h>
 #include <fcntl.h> 
 
-#define X_EVENT_KEY_PRESS 3
+#define X_EVENT_KEY_PRESS 2
 //#define X_EVENT_KEY_EXIT 0
 #define X_EVENT_KEY_EXIT 17
 #define SPRITE_RES_X_Y 44
-#define SOMETHING 000000
 
 #define LIGHT_GREY 0xd3d3d3
 #define GOLD 0xffd700
@@ -37,7 +36,7 @@
 /* #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600 */
 
-#define BUFFER_COUNT 500
+#define BUFFER_COUNT 7000
 
 #define sapinho "./sprites_Solong/player_64px.xpm"
 #define grass "./sprites_Solong/grass_64px.xpm"
@@ -45,6 +44,8 @@
 #define player_exit "./sprites_Solong/exit.xpm"
 #define player_collectible "./sprites_Solong/collectible.xpm"
 #define polluted_lake "./sprites_Solong/lake_polluted.xpm"
+
+
 
 typedef struct s_sprites
 {    
@@ -57,74 +58,43 @@ typedef struct s_sprites
         
 }   t_sprites;
 
-typedef struct s_grid
-{
-    int width;
-    int height;
-    
-    char **map_grid;
-
-    int collectible_total;
-
-    int collectible_count;
-    int exit_count;
-    int player_count;
-    int empty_spaces;   
-
-    int move_count;
-    
-}   t_grid;
-
-
 typedef struct s_indexs
 {
     int i;
     int j;
-
     int exit_i;
     int exit_j;
-
     int player_start_i;
     int player_start_j; 
+    
 
 }   t_indexs;
-
-
-/* typedef struct s_rect
-{
-    int x;
-    int y;
-
-    int width;
-    int height;
-
-    int color;
-    
-}   t_rect; */
 
 typedef struct s_map
 {
     int height;
     int width;
-    char **full_map;
+    char **full_map;    
     
 }   t_map;
 
 typedef struct s_tudo
 {
-    void *mlx_init;
-    void *mlx_window;   
-
     t_sprites sprites;
-
     t_map map;
-
     t_indexs indexs; 
-
-    t_grid grid;
-
-    int sapo_x;
-    int sapo_y;    
+    
+    void *mlx_init;
+    void *mlx_window;
+    char *str_put;
+    int collectible_total;
+    int collectible_count;
+    int exit_count;
+    int player_count;
+    int empty_spaces;
+    int move_count;
+    int sprite_x;
+    int sprite_y;    
     
 }   t_tudo;
 
@@ -134,29 +104,29 @@ char	*token(const char *s, int columns, int index);
 char	**words_divider(char const *s, char **words, char delimeter, int len);
 char	**ft_split(char const *s, char delimeter);
 
-char	*ft_strdup(const char *s);
-int	itoa_size(int n);
-char	*convertion(char *str, int n, int len, int j);
-char	*ft_itoa(int n);
+int		len(long nb);
+char	*ft_itoa(int nb);
+char	*ft_strstr(char *str, char *to_find);
+void	ft_bzero(void *s, size_t n);
 
 int keyboard(int keycode, t_tudo *tudo);
 void put_string(t_tudo *tudo);
 void mouse_input(t_tudo *tudo);
 int main (int argc, char **argv);
 
-void move_to_the_right(t_tudo *tudo);
-void move_to_the_left(t_tudo *tudo);
-void move_up(t_tudo *tudo);
-void move_down(t_tudo *tudo);
+void move_sprite(t_tudo *tudo, int x, int y);
+void error(char *text);
+void	ft_bzero(void *s, size_t n);
 
 void loop_map_grid(t_tudo *tudo);
 void loop_grid(t_tudo *tudo);
 void loop_grid_collectible(t_tudo *tudo);
 
-void create_map(char *filename, t_map *map);
+int create_map(char *filename, t_tudo *tudo);
+void check_map(t_tudo *tudo);
 int exit_game(t_tudo *tudo);
 void free_map(char **map);
-void create_sprites(t_tudo *tudo);
+t_sprites create_sprites(void *mlx_init);
 void insert_sprites(t_tudo *tudo, int i, int j);
 
 void not_rect(t_tudo *tudo);
