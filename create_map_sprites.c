@@ -6,40 +6,38 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:30:09 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/25 22:31:19 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/26 21:20:47 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int create_map(char *filename, t_tudo *tudo)
+void create_map(char *filename, int fd, t_tudo *tudo)
 {
     size_t bytes_read;
     char *buf;
-    int fd;
     
-    fd = open(filename, O_RDONLY);    
-    if (fd == -1)
-        {
-            perror("Error\n");
-            exit(0);            
-        }
+    fd = open(filename, O_RDONLY);   
     buf = (char *)malloc(sizeof(char) * BUFFER_COUNT);
-    if(!buf)
-        return (0);
+    if(!buf || fd < 0)
+    {
+        free(buf);
+        error("No such file or directory\n");       
+    }
     bytes_read = read(fd, buf, BUFFER_COUNT);
-    if (bytes_read <= 0)
-	    free(buf);
-    buf[bytes_read] = '\0'; 
-   
-    tudo->map.full_map = ft_split(buf, '\n');    
+    if (bytes_read <= 14)
+    {
+        free(buf);
+        error("File empty or too small to be aceptable\n");        
+    }
+    buf[bytes_read] = '\0';    
+    tudo->map.full_map = ft_split(buf, '\n'); 
+    free(buf);    
+    close(fd); 
     tudo->map.width = ft_strlen_long(tudo->map.full_map[0]);
     tudo->map.height  = bytes_read / tudo->map.width;
-    if (tudo->map.width < tudo->map.height )
-        tudo->map.height --;
-    free(buf);
-    close(fd);
-    return(1);      
+    if (tudo->map.width < tudo->map.height)
+        tudo->map.height --;     
 }
 
 t_sprites create_sprites(void *mlx_init)
@@ -83,30 +81,40 @@ void insert_sprites(t_tudo *tudo, int i, int j)
         tudo->sprites.exit1, tudo->indexs.exit_j * 44, tudo->indexs.exit_i * 44);
 } 
 
-/* char	*read_file(int32_t fd)
+void move_sprite(t_tudo *tudo, int x, int y)
 {
-	int32_t	buflen;
-	char	*line;
-	char	*buf;
+    loop_grid(tudo);  // this function represents where player starts    
+    if (tudo->map.full_map[tudo->indexs.i + x][tudo->indexs.j + y] != '1' && tudo->map.full_map[tudo->indexs.i + x][tudo->indexs.j + y] != 'E')
+    {
+        tudo->move_count++;
+        put_string(tudo);
+        if (tudo->map.full_map[tudo->indexs.i + x][tudo->indexs.j + y] == 'F')
+        {
+            ft_printf("//////Congratulations, you finish the game with");
+            ft_printf(" %d moves\\\\\\\\\\ \n", tudo->move_count);
+            exit_game(tudo);
+        }
+        if(tudo->map.full_map[tudo->indexs.i + x][tudo->indexs.j + y] == 'C')
+            tudo->collectible_total--;            
+        tudo->map.full_map[tudo->indexs.i + x][tudo->indexs.j + y] = 'P';
+        tudo->map.full_map[tudo->indexs.i][tudo->indexs.j] = '0';                
+    }
+    if (tudo->collectible_total == 0)
+        tudo->map.full_map[tudo->indexs.exit_i][tudo->indexs.exit_j] = 'F';
+    loop_map_grid(tudo);
+}
 
-	buflen = 1;
-	line = ft_calloc(1, 1);
-	buf = malloc(BUFFERSIZE + 1 * sizeof(char));
-	while (buflen > 0)
-	{
-		buflen = read(fd, buf, BUFFERSIZE);
-		if (buflen <= 0)
-			free (buf);
-		if (buflen == 0)
-			return (line);
-		if (buflen < 0)
-			return (NULL);
-		buf[buflen] = '\0';
-		line = gnl_strjoin(line, buf);
-	}
-	close(fd);
-	return (line);
-} */
+void put_string(t_tudo *tudo)
+{    
+    tudo->str_put = ft_itoa(tudo->move_count);
+    if(tudo->move_count != 0)
+    mlx_clear_window(tudo->mlx_init, tudo->mlx_window);    
+    mlx_string_put(tudo->mlx_init, tudo->mlx_window, tudo->map.width, tudo->map.height * 44 + 22, 
+    GOLD, "Number of moves:");
+    mlx_string_put(tudo->mlx_init, tudo->mlx_window, tudo->map.width + 110, tudo->map.height * 44 + 22, 
+    GOLD, tudo->str_put); 
+    free(tudo->str_put);      
+}
 
 
 

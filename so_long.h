@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:12:20 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/25 17:12:18 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/26 20:02:07 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #define SO_LONG_H 
 
 #include "./minilibx-linux/mlx.h"
+#include "./ft_printf/ft_printf.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <errno.h>
 #include<sys/types.h>
 #include<sys/stat.h>
 #include <fcntl.h> 
@@ -65,8 +65,7 @@ typedef struct s_indexs
     int exit_i;
     int exit_j;
     int player_start_i;
-    int player_start_j; 
-    
+    int player_start_j;     
 
 }   t_indexs;
 
@@ -74,7 +73,7 @@ typedef struct s_map
 {
     int height;
     int width;
-    char **full_map;    
+    char **full_map;      
     
 }   t_map;
 
@@ -116,23 +115,23 @@ int main (int argc, char **argv);
 
 void move_sprite(t_tudo *tudo, int x, int y);
 void error(char *text);
+void error_free_m(t_tudo *tudo, char *text);
 void	ft_bzero(void *s, size_t n);
 
 void loop_map_grid(t_tudo *tudo);
 void loop_grid(t_tudo *tudo);
 void loop_grid_collectible(t_tudo *tudo);
 
-int create_map(char *filename, t_tudo *tudo);
+void create_map(char *filename,int fd, t_tudo *tudo);
 void check_map(t_tudo *tudo);
 int exit_game(t_tudo *tudo);
 void free_map(char **map);
 t_sprites create_sprites(void *mlx_init);
 void insert_sprites(t_tudo *tudo, int i, int j);
 
-void not_rect(t_tudo *tudo);
 void loop_number_of_sprites(t_tudo *tudo);
 void check_number_of_sprites(t_tudo *tudo);
-void loop_surrounded_by_walls(t_tudo *tudo);
+void wall_check(t_tudo *tudo);
 void enqueue(t_tudo *tudo, int r, int c);
 void dequeue(t_tudo *tudo);
 void check_valid_path(t_tudo *tudo);

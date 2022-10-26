@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 12:47:22 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/25 23:09:51 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/26 20:23:46 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,62 +14,63 @@
 
 void error(char *text)
 {
-    printf("ERROR\n");
-    printf("%s", text);
+    ft_printf("Error\n");
+    ft_printf("%s", text);
+    exit(0);
+}
+
+void error_free_m(t_tudo *tudo, char *text)
+{
+    ft_printf("Error\n");
+    ft_printf("%s", text);
+    free(tudo->mlx_init);
+    free_map(tudo->map.full_map);
     exit(0);
 }
 
 void check_map(t_tudo *tudo)
 {
-    not_rect(tudo);
     check_number_of_sprites(tudo);
-    loop_surrounded_by_walls(tudo); 
+    wall_check(tudo); 
 }
-
-void not_rect(t_tudo *tudo)
-{
-    if  (tudo->map.width == tudo->map.height)
-        error("Map cannot be a square!\n");
     
-}
-void loop_surrounded_by_walls(t_tudo *tudo)
+void wall_check(t_tudo *tudo)
  {  
     int i;
     int j;
     
     i = 0;
-    j = 0;
-    
+    j = 0;    
     while(i < tudo->map.height)
     {         
         j = 0;
         if  (tudo->map.full_map[i][0] != '1' || tudo->map.full_map[i][tudo->map.width - 1] != '1')
-         error("Map must be surrounded by walls\n");        
+         error_free_m(tudo, "Map must be surrounded by walls\n");        
         while(j < tudo->map.width)
         {
             if  (tudo->map.full_map[0][j] != '1' || tudo->map.full_map[tudo->map.height - 1][j] != '1')
-                error("Map must be surrounded by walls\n");   
+                error_free_m(tudo, "Map must be surrounded by walls\n");   
             j++;
         }
         i++;
     }
+    if  (tudo->map.width == tudo->map.height)
+        error_free_m(tudo, "Map cannot be a square!\n");
 }
 
 void check_number_of_sprites(t_tudo *tudo)
 {
     loop_number_of_sprites(tudo);
-    loop_grid(tudo);
-    
+    loop_grid(tudo);    
     if (tudo->exit_count != 1)
-      error("Wrong number of Exits\n");    
+      error_free_m(tudo, "Wrong number of Exits\n");    
     if (tudo->player_count != 1)
-      error("Must have 1 Player start\n");
+      error_free_m(tudo, "Must have only 1 Player start\n");
     if (tudo->collectible_count == 0)
-      error("Must have at least one collectible\n");
+      error_free_m(tudo, "Must have at least one collectible\n");
 }
 
 int	valid_path(t_tudo *tudo, int i, int j)
-
 {
 	if (tudo->map.full_map[i][j] == 'C' || tudo->map.full_map[i][j] == '0')
 	{

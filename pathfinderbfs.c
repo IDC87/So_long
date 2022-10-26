@@ -6,11 +6,11 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:12:11 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/17 16:18:43 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/26 21:22:23 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+/* #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include<sys/types.h>
@@ -243,4 +243,4 @@ int main (int arcg, char **argv)
     
     return 0;
 }
-    
+     */

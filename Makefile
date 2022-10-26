@@ -10,6 +10,8 @@ MLX = -lbsd -lmlx -lXext -lX11
 
 MLX_42 = -L./minilibx-linux -lbsd -lmlx -lXext -lX11
 
+FT_PRINTF = ./ft_printf/libftprintf.a
+
 SRCS =	utils.c\
 		utils_2.c\
 		create_map_sprites.c\
@@ -18,6 +20,7 @@ SRCS =	utils.c\
 		so_long.c\
 
 valgrind = --leak-check=full \
+			--error-limit=yes \
 		--show-leak-kinds=all \
          --track-origins=yes \
          --verbose \
@@ -32,7 +35,7 @@ compile:
 	rm -rf valgrind-out.txt
 
 Solong:	compile $(SRC)
-	 $(CC) -g -std=c11 $(CFLAGS) -ggdb3 $(SRCS) $(MLX_42) && valgrind $(valgrind) ./a.out $(MAPS)
+	 $(CC) -g -std=c11 $(CFLAGS) -ggdb3 $(SRCS) $(FT_PRINTF) $(MLX_42) && valgrind $(valgrind) ./a.out $(MAPS)
 
 
  
