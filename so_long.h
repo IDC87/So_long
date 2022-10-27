@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:12:20 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/26 20:02:07 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/27 21:03:19 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ typedef struct s_indexs
     int j;
     int exit_i;
     int exit_j;
-    int player_start_i;
-    int player_start_j;     
+    //int player_start_i;
+    //int player_start_j;     
 
 }   t_indexs;
 
@@ -73,7 +73,8 @@ typedef struct s_map
 {
     int height;
     int width;
-    char **full_map;      
+    char **full_map; 
+    char **tmp_grid;     
     
 }   t_map;
 
@@ -88,6 +89,7 @@ typedef struct s_tudo
     char *str_put;
     int collectible_total;
     int collectible_count;
+    int collectible_debug_count;
     int exit_count;
     int player_count;
     int empty_spaces;
@@ -106,7 +108,8 @@ char	**ft_split(char const *s, char delimeter);
 int		len(long nb);
 char	*ft_itoa(int nb);
 char	*ft_strstr(char *str, char *to_find);
-void	ft_bzero(void *s, size_t n);
+//char	*ft_strdup(const char *s);
+
 
 int keyboard(int keycode, t_tudo *tudo);
 void put_string(t_tudo *tudo);
@@ -116,7 +119,7 @@ int main (int argc, char **argv);
 void move_sprite(t_tudo *tudo, int x, int y);
 void error(char *text);
 void error_free_m(t_tudo *tudo, char *text);
-void	ft_bzero(void *s, size_t n);
+
 
 void loop_map_grid(t_tudo *tudo);
 void loop_grid(t_tudo *tudo);
@@ -135,5 +138,6 @@ void wall_check(t_tudo *tudo);
 void enqueue(t_tudo *tudo, int r, int c);
 void dequeue(t_tudo *tudo);
 void check_valid_path(t_tudo *tudo);
+void	ft_validmap_check(t_tudo *tudo, int x, int y);
 
 #endif

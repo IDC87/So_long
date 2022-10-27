@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 12:47:22 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/26 20:23:46 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/27 21:03:29 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,191 +70,174 @@ void check_number_of_sprites(t_tudo *tudo)
       error_free_m(tudo, "Must have at least one collectible\n");
 }
 
-int	valid_path(t_tudo *tudo, int i, int j)
-{
-	if (tudo->map.full_map[i][j] == 'C' || tudo->map.full_map[i][j] == '0')
-	{
-		if (tudo->map.full_map[i][j] == 'C')
-			tudo->collectible_total--;
-		if (tudo->map.full_map[i][j] == 'E')
-			tudo->exit_count--;
-		tudo->map.full_map[i][j] = 'P';
-		valid_path(tudo, i - 1, j);
-		valid_path(tudo, i + 1, j);
-		valid_path(tudo, i, j + 1);
-		valid_path(tudo, i, j - 1);
-	}
-	if (tudo->collectible_total != 0)
-		return (1);
-	return (0);
-}
-
-/* void enqueue(t_tudo *tudo, int r, int c)
-{
-   tudo->queue.rq[tudo->queue.count] = r;
-   tudo->queue.cq[tudo->queue.count] = c;
-    tudo->queue.count++;    
-    printf("SIZE OF QUEUE: %d\n", tudo->queue.count);
-    
-} 
-
-void dequeue(t_tudo *tudo)
-{
-    int i;
-    
-    i = 0;
-    tudo->queue.rq[tudo->queue.count] = tudo->queue.rq[0];
-    tudo->queue.cq[tudo->queue.count] = tudo->queue.cq[0];
-
-    while(i < tudo->queue.count)
-    {
-        tudo->queue.rq[i] = tudo->queue.rq[i + 1];
-        tudo->queue.cq[i] = tudo->queue.cq[i + 1];
-        i++;
-        
-    }
-    tudo->queue.count--;
-    
-}
 
 void check_valid_path(t_tudo *tudo)
 {
-   int dr[4] = {-1, 1, 0, 0};
-   int dc[4] = {0, 0, 1, -1};
-   int i;
-   int r;
-   int c;
-   int rr;
-   int cc;
+    int x;
+    int y;
+    int	i;
     
+	i = 0;
+	while (i < tudo->map.height)
+	{
+		tudo->map.tmp_grid[i] = ft_strdup(tudo->map.full_map[i]);
+		i++;
+	}
 
-    tudo->queue.size_of_queue = tudo->map.empty_spaces + tudo->grid.collectible_count;
-    tudo->queue.rq = (int *)malloc(sizeof(tudo->queue) * (5));
-    tudo->queue.cq = (int *)malloc(sizeof(tudo->queue) * (5));
+     
+
+    loop_grid(tudo);    
+    y = tudo->indexs.i;
+    x = tudo->indexs.j;
+    ft_printf("start x %d\n", x);
+    ft_printf("start y %d\n", y);
     
-    while (i < tudo->queue.size_of_queue)
-    {
-       tudo->queue.cq[i] = 0;
-       tudo->queue.cq[i] = 0;
-       i++;
-    }
+    tudo->collectible_total = tudo->collectible_count;
+    tudo->exit_count = 0;
+    tudo->collectible_debug_count = tudo->collectible_count;
+    
+    ft_validmap_check(tudo, x, y);
+    
+    
+    ft_printf("Collectible debug: %d\n", tudo->collectible_debug_count);
+    //ft_printf("Collectible debug total: %d\n", tudo->collectible_total);
+    ft_printf("exit debug total: %d\n", tudo->exit_count);
+    
+    if (tudo->collectible_debug_count != 0 || tudo->exit_count != 1)
+		ft_printf("Error! There isn't valid way to go exit.");
+      else
+        ft_printf("valid path");
+}
 
-   tudo->queue.move_count = 0;
-    tudo->queue.nodes_left_in_layer = 1;
-    tudo->queue.nodes_in_next_layer = 0; 
-     tudo->queue.count = 0; 
-       i = 0;
-    enqueue(tudo, tudo->indexs.player_start_i, tudo->indexs.player_start_j);
-    tudo->grid.temp_grid[tudo->indexs.player_start_i][tudo->indexs.player_start_j] = 'V'; 
-     int j = 0;
-    while (tudo->queue.count) 
-    {
-        
-        r = tudo->queue.rq[0];
-        c = tudo->queue.cq[0];
-        dequeue(tudo);
-        if (tudo->grid.temp_grid[r][c] == 'E')
-        {
-            printf("EXIT FOUND in coordinate r[%d] c[%d]\n\n", r, c);
-            break;
-        }
-        
-     //explore neighbours. to put in another function later
-        i = 0;
-        while (i < 4) // 4 because of the four adjacent positions
-        {
-            rr = r + dr[i];
-            cc = c + dc[i];
-            
-            if ((rr > 0 || cc > 0) && (rr <= tudo->grid.width || cc <= tudo->grid.height))
-            {
-                if (tudo->grid.temp_grid[rr][cc] != '1' && tudo->grid.temp_grid[rr][cc] != 'V')
-                {    
-                    enqueue(tudo, rr, cc);  
-                    if (tudo->grid.temp_grid[rr][cc] == 'E')
-                        break;              
-                    tudo->grid.temp_grid[rr][cc] = 'V';
-                    tudo->queue.nodes_in_next_layer++;
-                }                
-            }
-            i++;  
-        
-        }
-        tudo->queue.nodes_left_in_layer--;
-        if (tudo->queue.nodes_left_in_layer == 0)
-        {
-            tudo->queue.nodes_left_in_layer = tudo->queue.nodes_in_next_layer;
-            tudo->queue.nodes_in_next_layer = 0;
-            tudo->queue.move_count++;
-        } 
-        j++;  
-
-          printf("ROW QUEUE %d\n\n", tudo->queue.rq[j]);  
-           
-        printf("WHILE SIZE OF QUEUE %d\n\n", tudo->queue.count);
-        
-    }
-    free(tudo->queue.rq);
-        free(tudo->queue.cq);
-} */
-
-
-
-/* void check_valid_path(t_tudo *tudo)
+void	ft_validmap_check(t_tudo *tudo, int x, int y)
 {
-    int *row;
-    int *col;
-    int i;
-    int j;
-    int k;
-    int new_row;
-    int new_col;
-    int walkable_slots;
+		
+	if (tudo->map.tmp_grid[y][x] == 'E')
+		tudo->exit_count = 1;
+	if (tudo->map.tmp_grid[y][x] != 'E' && tudo->map.tmp_grid[y][x] != '1')
+	{
+		if (tudo->map.tmp_grid[y][x] == 'C')
+			tudo->collectible_debug_count--;
+		tudo->map.tmp_grid[y][x] = '.';
+		if (tudo->map.tmp_grid[y][x + 1] != '1' &&
+			tudo->map.tmp_grid[y][x + 1] != '.')
+			ft_validmap_check(tudo, x + 1, y);
+		if (tudo->map.tmp_grid[y][x - 1] != '1' &&
+			tudo->map.tmp_grid[y][x - 1] != '.')
+			ft_validmap_check(tudo, x - 1, y);
+		if (tudo->map.tmp_grid[y - 1][x] != '1' &&
+			tudo->map.tmp_grid[y - 1][x] != '.')
+			ft_validmap_check(tudo, x, y - 1);
+		if (tudo->map.tmp_grid[y + 1][x] != '1' &&
+			tudo->map.tmp_grid[y + 1][x] != '.')
+			ft_validmap_check(tudo, x, y + 1);
+	}
+}
 
-    walkable_slots = tudo->grid.empty_spaces + tudo->grid.collectible_count;
+/* void	ft_validmap_check(t_tudo *tudo, int x, int y)
+{
+	char	*p;
 
-    row = (int *)malloc(sizeof(int) * (walkable_slots));
-    col = (int *)malloc(sizeof(int) * (walkable_slots));
+	p = &tudo->map.full_map[y][x];
+	if (*p == 'E')
+		tudo->exit_count = 1;
+	if (*p != 'E' && *p != '1')
+	{
+		if (*p == 'C')
+			tudo->collectible_debug_count--;
+		*p = '.';
+		if (tudo->map.full_map[y][x + 1] != '1' &&
+			tudo->map.full_map[y][x + 1] != '.')
+			ft_validmap_check(tudo, x + 1, y);
+		if (tudo->map.full_map[y][x - 1] != '1' &&
+			tudo->map.full_map[y][x - 1] != '.')
+			ft_validmap_check(tudo, x - 1, y);
+		if (tudo->map.full_map[y - 1][x] != '1' &&
+			tudo->map.full_map[y - 1][x] != '.')
+			ft_validmap_check(tudo, x, y - 1);
+		if (tudo->map.full_map[y + 1][x] != '1' &&
+			tudo->map.full_map[y + 1][x] != '.')
+			ft_validmap_check(tudo, x, y + 1);
+	}
+} */
 
-    i = 0;
-    k = 0;
-    while(i < tudo->grid.height)
-    {     
-        j = 0;
-        while(j < tudo->grid.width)
-        {
-           if(tudo->grid.temp_grid[i][j] == '0' || tudo->grid.temp_grid[i][j] == 'C' )
-           {
-            row[k] = i;
-            col[k] = j;
-            k++;
-           }
-            j++;
-        }
-        i++;
-    }
-    i = 0;
-    while (i < (tudo->grid.empty_spaces + tudo->grid.collectible_count))
-    {
-        printf("row[%d] col[%d]\n", row[i], col[i]);
-        i++;        
-    }
+/* oid	ft_path_check(t_map *data)
+{
+	int	i;
 
-    new_row = tudo->indexs.player_start_i;
-    new_col = tudo->indexs.player_start_j;
-    
-    while (walkable_slots > 0)
-    {
-        i = 0;
-        while (i < 4)
-    }
-
-
-
-    
+	i = 0;
+	while (data->maps2[i])
+	{
+		free(data->maps2[i]);
+		i++;
+	}
+	free(data->maps2);
+	if (data->collect_algo != 0 || data->valid_e != 1)
+		ft_error("Error! There isn't valid way to go exit.");
 } */
 
 
+/* int paint_next_step(int x, int y, t_tudo *tudo)
+{
+	tudo->map.full_map[x][y] = ' ';
+	if (x + 1 < tudo->map.height - 1)
+	{
+        ft_printf("entrou em x + 1\n");
+		if (check_next_step(tudo, x + 1, y) == 1)
+			paint_next_step(x + 1, y, tudo);
+            
+	}
+	if (x - 1 > 0)
+	{
+        ft_printf("entrou em x - 1\n");
+		if (check_next_step(tudo, x - 1, y) == 1)
+			paint_next_step(x - 1, y, tudo);
+            
+	}
+	if (y + 1 < tudo->map.width - 1)
+	{
+        ft_printf("entrou em y + 1\n");
+		if (check_next_step(tudo, x, y + 1) == 1)
+			paint_next_step(x, y + 1, tudo);
+            
+	}
+	if (y - 1 > 0)
+	{
+        ft_printf("entrou em y - 1\n");
+		if (check_next_step(tudo, x, y - 1) == 1)
+			paint_next_step(x, y - 1, tudo);
+            
+	}
+	return (0);
+}
 
+int	check_next_step(t_tudo *tudo, int x, int y)
+{
+	if (tudo->map.full_map[x][y] == 'C')
+	{
+		tudo->collectible_debug_count++;
+		return (1);
+	}
+	else if (tudo->map.full_map[y][x] == 'E' && tudo->exit_count < 1)
+	{
+		tudo->exit_count++;
+		return (0);
+	}
+	else if (tudo->map.full_map[y][x] == '0')
+	{
+		return (1);
+	}
+	return (0);
+} */
 
+/* int	check_path(t_data *game)
+{
+	t_check	valid_path;
 
+	set_path_check(game, &valid_path);
+	if (valid_path.coins != game->map->objects->n_collectibles)
+		set_shutdown(0, game, "Error\nThere's something in the way.\n");
+	if (valid_path.exit != game->map->objects->n_exits)
+		set_shutdown(0, game, "Error\nThere's something in the way.\n");
+	return (0);
+} */

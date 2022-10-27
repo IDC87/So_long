@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:30:43 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/26 21:20:42 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/27 18:13:13 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void initialize_variables(t_tudo *tudo)
     tudo->map.width = 0;       
     tudo->collectible_total = 0;
     tudo->collectible_count = 0;
+    tudo->collectible_debug_count = 0;
     tudo->move_count = 0;
     tudo->exit_count = 0;
     tudo->player_count = 0;
@@ -96,6 +97,7 @@ int main (int argc, char **argv)
     initialize_variables(&tudo); 
     create_map(argv[1], 0, &tudo);
     check_map(&tudo);
+    check_valid_path(&tudo);
     initialize_game(&tudo);
     mlx_key_hook(tudo.mlx_window, &keyboard, &tudo);
     mlx_hook(tudo.mlx_window, X_EVENT_KEY_EXIT, 0, &exit_game, &tudo);
