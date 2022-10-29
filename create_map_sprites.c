@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:30:09 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/26 21:20:47 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:39:31 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ void create_map(char *filename, int fd, t_tudo *tudo)
         error("No such file or directory\n");       
     }
     bytes_read = read(fd, buf, BUFFER_COUNT);
+    ft_printf("number of bytes %d\n", bytes_read);
     if (bytes_read <= 14)
     {
         free(buf);
         error("File empty or too small to be aceptable\n");        
     }
     buf[bytes_read] = '\0';    
-    tudo->map.full_map = ft_split(buf, '\n'); 
+    tudo->map.full_map = ft_split(buf, '\n');
+    tudo->map.tmp_grid = ft_split(buf, '\n');
     free(buf);    
     close(fd); 
     tudo->map.width = ft_strlen_long(tudo->map.full_map[0]);

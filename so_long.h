@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:12:20 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/27 21:03:19 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/29 17:36:17 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,12 @@ int	nbr_tokens(char const *s, char delimeter);
 char	*token(const char *s, int columns, int index);
 char	**words_divider(char const *s, char **words, char delimeter, int len);
 char	**ft_split(char const *s, char delimeter);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 int		len(long nb);
 char	*ft_itoa(int nb);
 char	*ft_strstr(char *str, char *to_find);
-//char	*ft_strdup(const char *s);
+char	*ft_strdup(const char *s);
 
 
 int keyboard(int keycode, t_tudo *tudo);
@@ -135,8 +136,6 @@ void insert_sprites(t_tudo *tudo, int i, int j);
 void loop_number_of_sprites(t_tudo *tudo);
 void check_number_of_sprites(t_tudo *tudo);
 void wall_check(t_tudo *tudo);
-void enqueue(t_tudo *tudo, int r, int c);
-void dequeue(t_tudo *tudo);
 void check_valid_path(t_tudo *tudo);
 void	ft_validmap_check(t_tudo *tudo, int x, int y);
 

@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 12:47:22 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/27 21:03:29 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:42:07 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,28 +75,17 @@ void check_valid_path(t_tudo *tudo)
 {
     int x;
     int y;
-    int	i;
     
-	i = 0;
-	while (i < tudo->map.height)
-	{
-		tudo->map.tmp_grid[i] = ft_strdup(tudo->map.full_map[i]);
-		i++;
-	}
 
-     
-
-    loop_grid(tudo);    
+    loop_grid(tudo);
+    loop_grid_collectible(tudo);    
     y = tudo->indexs.i;
     x = tudo->indexs.j;
     ft_printf("start x %d\n", x);
     ft_printf("start y %d\n", y);
     
-    tudo->collectible_total = tudo->collectible_count;
-    tudo->exit_count = 0;
-    tudo->collectible_debug_count = tudo->collectible_count;
-    
-    ft_validmap_check(tudo, x, y);
+    tudo->collectible_debug_count = tudo->collectible_total;
+    ft_validmap_check(tudo, x, y);   
     
     
     ft_printf("Collectible debug: %d\n", tudo->collectible_debug_count);
@@ -104,9 +93,13 @@ void check_valid_path(t_tudo *tudo)
     ft_printf("exit debug total: %d\n", tudo->exit_count);
     
     if (tudo->collectible_debug_count != 0 || tudo->exit_count != 1)
-		ft_printf("Error! There isn't valid way to go exit.");
+    {
+        free_map(tudo->map.tmp_grid);
+		error("Error! There isn't valid way to go exit.\n");
+    }
       else
         ft_printf("valid path");
+    free_map(tudo->map.tmp_grid);
 }
 
 void	ft_validmap_check(t_tudo *tudo, int x, int y)
@@ -241,3 +234,15 @@ int	check_next_step(t_tudo *tudo, int x, int y)
 		set_shutdown(0, game, "Error\nThere's something in the way.\n");
 	return (0);
 } */
+
+/* int	i;
+    
+	i = 0;
+    tudo->map.tmp_grid = (char **)malloc(sizeof(char *) * tudo->map.height * tudo->map.width);
+	while (i < tudo->map.height)
+	{
+		tudo->map.tmp_grid[i] = ft_strdup(tudo->map.full_map[i]);
+        ft_memcpy(tudo->map.tmp_grid[i], tudo->map.full_map[i], tudo->map.width);
+        
+		i++;
+	}    */

@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:32:39 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/27 21:01:00 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/29 17:30:14 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,25 @@ char	*ft_strstr(char *str, char *to_find)
 		++i;
 	}
 	return (0);
+}
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	size_t		i;
+	char		*tempdst;
+	const char	*tempsrc;
+
+	if (dst == 0 && src == 0)
+		return (0);
+	i = 0;
+	tempdst = dst;
+	tempsrc = src;
+	while (i < n)
+	{
+		tempdst[i] = tempsrc[i];
+		i++;
+	}
+	return (dst);
 }
 
 /* char	*ft_strdup(const char *s)

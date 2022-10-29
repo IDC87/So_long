@@ -27,7 +27,7 @@ valgrind = --leak-check=full \
          --log-file=valgrind-out.txt \
          
 
-MAPS = Maps/map2.ber	
+MAPS = Maps/map3.ber	
 
 OBJS =	$(SRCS:.c=.o)
 
