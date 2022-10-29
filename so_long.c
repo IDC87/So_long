@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:30:43 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/29 17:16:04 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/29 20:27:35 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int main (int argc, char **argv)
     else         
         error("Map file missing in argument, or too many arguments\n");
     initialize_variables(&tudo); 
-    create_map(argv[1], 0, &tudo);
+    import_map(argv[1], 0, &tudo);
     check_map(&tudo);
     check_valid_path(&tudo);
     initialize_game(&tudo);

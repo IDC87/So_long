@@ -1,141 +1,141 @@
-==52887== Memcheck, a memory error detector
-==52887== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==52887== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
-==52887== Command: ./a.out Maps/map3.ber
-==52887== Parent PID: 52871
-==52887== 
---52887-- 
---52887-- Valgrind options:
---52887--    --leak-check=full
---52887--    --error-limit=yes
---52887--    --show-leak-kinds=all
---52887--    --track-origins=yes
---52887--    --verbose
---52887--    --log-file=valgrind-out.txt
---52887-- Contents of /proc/version:
---52887--   Linux version 5.19.11-t2 (root@e2997f705b9f) (gcc (Ubuntu 11.2.0-19ubuntu1) 11.2.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #2 SMP PREEMPT_DYNAMIC Mon Sep 26 17:42:07 UTC 2022
---52887-- 
---52887-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
---52887-- Page sizes: currently 4096, max supported 4096
---52887-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
---52887-- Reading syms from /nfs/homes/ivda-cru/Documents/So_long/a.out
---52887-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
---52887--   Considering /usr/lib/debug/.build-id/45/87364908de169dec62ffa538170118c1c3a078.debug ..
---52887--   .. build-id is valid
---52887-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
---52887--    object doesn't have a symbol table
---52887--    object doesn't have a dynamic symbol table
---52887-- Scheduler: using generic scheduler lock implementation.
---52887-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
-==52887== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-52887-by-ivda-cru-on-???
-==52887== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-52887-by-ivda-cru-on-???
-==52887== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-52887-by-ivda-cru-on-???
-==52887== 
-==52887== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==52887== don't want to do, unless you know exactly what you're doing,
-==52887== or are doing some strange experiment):
-==52887==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=52887 ...command...
-==52887== 
-==52887== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==52887==   /path/to/gdb ./a.out
-==52887== and then give GDB the following command
-==52887==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=52887
-==52887== --pid is optional if only one valgrind process is running
-==52887== 
---52887-- REDIR: 0x4022e20 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
---52887-- REDIR: 0x4022bf0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
---52887-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
---52887--    object doesn't have a symbol table
---52887-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
---52887--    object doesn't have a symbol table
-==52887== WARNING: new redirection conflicts with existing -- ignoring it
---52887--     old: 0x04022e20 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
---52887--     new: 0x04022e20 (strlen              ) R-> (2007.0) 0x0483f060 strlen
---52887-- REDIR: 0x401f600 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
---52887-- REDIR: 0x4023380 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
---52887-- Reading syms from /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0
---52887--   Considering /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0 ..
---52887--   .. CRC mismatch (computed 7e27e1ef wanted 4ab025b2)
---52887--   Considering /lib/x86_64-linux-gnu/libXext.so.6.4.0 ..
---52887--   .. CRC mismatch (computed 7e27e1ef wanted 4ab025b2)
---52887--    object doesn't have a symbol table
---52887-- Reading syms from /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
---52887--    object doesn't have a symbol table
---52887-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
---52887--   Considering /usr/lib/debug/.build-id/18/78e6b475720c7c51969e69ab2d276fae6d1dee.debug ..
---52887--   .. build-id is valid
---52887-- Reading syms from /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
---52887--    object doesn't have a symbol table
---52887-- Reading syms from /usr/lib/x86_64-linux-gnu/libdl-2.31.so
---52887--   Considering /usr/lib/debug/.build-id/c0/f40155b3f8bf8c494fa800f9ab197ebe20ed6e.debug ..
---52887--   .. build-id is valid
---52887-- Reading syms from /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0
---52887--   Considering /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0 ..
---52887--   .. CRC mismatch (computed 7de9b6ad wanted e8a17129)
---52887--   Considering /lib/x86_64-linux-gnu/libXau.so.6.0.0 ..
---52887--   .. CRC mismatch (computed 7de9b6ad wanted e8a17129)
---52887--    object doesn't have a symbol table
---52887-- Reading syms from /usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0
---52887--    object doesn't have a symbol table
---52887-- Reading syms from /usr/lib/x86_64-linux-gnu/libbsd.so.0.10.0
---52887--    object doesn't have a symbol table
---52887-- REDIR: 0x4a55480 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a54780 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a557b0 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a540a0 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a547e0 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a56c50 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a71ce0 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a71820 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a555e0 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a55410 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a54710 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a54150 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a55540 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a717e0 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a54670 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a54230 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a55800 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a541d0 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a55950 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a72f50 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a71860 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a54820 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a54100 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a54630 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a5dbb0 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a55850 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a553d0 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a71930 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a54ae0 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a55750 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a556f0 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a56c90 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4a558a0 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---52887-- REDIR: 0x4b3d500 (libc.so.6:__strrchr_avx2) redirected to 0x483ea10 (rindex)
---52887-- REDIR: 0x4a4f0e0 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
---52887-- REDIR: 0x4a4f6d0 (libc.so.6:free) redirected to 0x483c9d0 (free)
---52887-- REDIR: 0x4b3d6d0 (libc.so.6:__strlen_avx2) redirected to 0x483ef40 (strlen)
---52887-- REDIR: 0x4b39010 (libc.so.6:__strncmp_avx2) redirected to 0x483f670 (strncmp)
---52887-- REDIR: 0x4a50b10 (libc.so.6:calloc) redirected to 0x483dce0 (calloc)
---52887-- REDIR: 0x4b406e0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x48429f0 (memmove)
---52887-- REDIR: 0x4b3d310 (libc.so.6:__strchrnul_avx2) redirected to 0x4843540 (strchrnul)
---52887-- REDIR: 0x4ae2c00 (libc.so.6:__strcpy_chk) redirected to 0x48435c0 (__strcpy_chk)
---52887-- REDIR: 0x4a54fa0 (libc.so.6:__GI_strstr) redirected to 0x4843ca0 (__strstr_sse2)
---52887-- REDIR: 0x4b39cc0 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x48421e0 (bcmp)
---52887-- REDIR: 0x4b40b60 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x48428e0 (memset)
---52887-- REDIR: 0x4a4fe80 (libc.so.6:realloc) redirected to 0x483df30 (realloc)
---52887-- REDIR: 0x4b3efa0 (libc.so.6:__strncpy_avx2) redirected to 0x483f230 (strncpy)
---52887-- REDIR: 0x4b3ec10 (libc.so.6:__strcpy_avx2) redirected to 0x483f090 (strcpy)
-==52887== 
-==52887== HEAP SUMMARY:
-==52887==     in use at exit: 0 bytes in 0 blocks
-==52887==   total heap usage: 2,151 allocs, 2,151 frees, 785,128 bytes allocated
-==52887== 
-==52887== All heap blocks were freed -- no leaks are possible
-==52887== 
-==52887== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
---52887-- 
---52887-- used_suppression:      1 X on SUSE11 writev uninit padding /usr/lib/x86_64-linux-gnu/valgrind/default.supp:397
-==52887== 
-==52887== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+==93148== Memcheck, a memory error detector
+==93148== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==93148== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==93148== Command: ./a.out Maps/map3.ber
+==93148== Parent PID: 93132
+==93148== 
+--93148-- 
+--93148-- Valgrind options:
+--93148--    --leak-check=full
+--93148--    --error-limit=yes
+--93148--    --show-leak-kinds=all
+--93148--    --track-origins=yes
+--93148--    --verbose
+--93148--    --log-file=valgrind-out.txt
+--93148-- Contents of /proc/version:
+--93148--   Linux version 5.19.11-t2 (root@e2997f705b9f) (gcc (Ubuntu 11.2.0-19ubuntu1) 11.2.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #2 SMP PREEMPT_DYNAMIC Mon Sep 26 17:42:07 UTC 2022
+--93148-- 
+--93148-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
+--93148-- Page sizes: currently 4096, max supported 4096
+--93148-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
+--93148-- Reading syms from /nfs/homes/ivda-cru/Documents/So_long/a.out
+--93148-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
+--93148--   Considering /usr/lib/debug/.build-id/45/87364908de169dec62ffa538170118c1c3a078.debug ..
+--93148--   .. build-id is valid
+--93148-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
+--93148--    object doesn't have a symbol table
+--93148--    object doesn't have a dynamic symbol table
+--93148-- Scheduler: using generic scheduler lock implementation.
+--93148-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
+==93148== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-93148-by-ivda-cru-on-???
+==93148== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-93148-by-ivda-cru-on-???
+==93148== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-93148-by-ivda-cru-on-???
+==93148== 
+==93148== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==93148== don't want to do, unless you know exactly what you're doing,
+==93148== or are doing some strange experiment):
+==93148==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=93148 ...command...
+==93148== 
+==93148== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==93148==   /path/to/gdb ./a.out
+==93148== and then give GDB the following command
+==93148==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=93148
+==93148== --pid is optional if only one valgrind process is running
+==93148== 
+--93148-- REDIR: 0x4022e20 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
+--93148-- REDIR: 0x4022bf0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
+--93148-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
+--93148--    object doesn't have a symbol table
+--93148-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
+--93148--    object doesn't have a symbol table
+==93148== WARNING: new redirection conflicts with existing -- ignoring it
+--93148--     old: 0x04022e20 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
+--93148--     new: 0x04022e20 (strlen              ) R-> (2007.0) 0x0483f060 strlen
+--93148-- REDIR: 0x401f600 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
+--93148-- REDIR: 0x4023380 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
+--93148-- Reading syms from /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0
+--93148--   Considering /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0 ..
+--93148--   .. CRC mismatch (computed 7e27e1ef wanted 4ab025b2)
+--93148--   Considering /lib/x86_64-linux-gnu/libXext.so.6.4.0 ..
+--93148--   .. CRC mismatch (computed 7e27e1ef wanted 4ab025b2)
+--93148--    object doesn't have a symbol table
+--93148-- Reading syms from /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+--93148--    object doesn't have a symbol table
+--93148-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
+--93148--   Considering /usr/lib/debug/.build-id/18/78e6b475720c7c51969e69ab2d276fae6d1dee.debug ..
+--93148--   .. build-id is valid
+--93148-- Reading syms from /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+--93148--    object doesn't have a symbol table
+--93148-- Reading syms from /usr/lib/x86_64-linux-gnu/libdl-2.31.so
+--93148--   Considering /usr/lib/debug/.build-id/c0/f40155b3f8bf8c494fa800f9ab197ebe20ed6e.debug ..
+--93148--   .. build-id is valid
+--93148-- Reading syms from /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0
+--93148--   Considering /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0 ..
+--93148--   .. CRC mismatch (computed 7de9b6ad wanted e8a17129)
+--93148--   Considering /lib/x86_64-linux-gnu/libXau.so.6.0.0 ..
+--93148--   .. CRC mismatch (computed 7de9b6ad wanted e8a17129)
+--93148--    object doesn't have a symbol table
+--93148-- Reading syms from /usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0
+--93148--    object doesn't have a symbol table
+--93148-- Reading syms from /usr/lib/x86_64-linux-gnu/libbsd.so.0.10.0
+--93148--    object doesn't have a symbol table
+--93148-- REDIR: 0x4a55480 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a54780 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a557b0 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a540a0 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a547e0 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a56c50 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a71ce0 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a71820 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a555e0 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a55410 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a54710 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a54150 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a55540 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a717e0 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a54670 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a54230 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a55800 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a541d0 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a55950 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a72f50 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a71860 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a54820 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a54100 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a54630 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a5dbb0 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a55850 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a553d0 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a71930 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a54ae0 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a55750 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a556f0 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a56c90 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4a558a0 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93148-- REDIR: 0x4b3d500 (libc.so.6:__strrchr_avx2) redirected to 0x483ea10 (rindex)
+--93148-- REDIR: 0x4a4f0e0 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
+--93148-- REDIR: 0x4a4f6d0 (libc.so.6:free) redirected to 0x483c9d0 (free)
+--93148-- REDIR: 0x4b3d6d0 (libc.so.6:__strlen_avx2) redirected to 0x483ef40 (strlen)
+--93148-- REDIR: 0x4b39010 (libc.so.6:__strncmp_avx2) redirected to 0x483f670 (strncmp)
+--93148-- REDIR: 0x4a50b10 (libc.so.6:calloc) redirected to 0x483dce0 (calloc)
+--93148-- REDIR: 0x4b406e0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x48429f0 (memmove)
+--93148-- REDIR: 0x4b3d310 (libc.so.6:__strchrnul_avx2) redirected to 0x4843540 (strchrnul)
+--93148-- REDIR: 0x4ae2c00 (libc.so.6:__strcpy_chk) redirected to 0x48435c0 (__strcpy_chk)
+--93148-- REDIR: 0x4a54fa0 (libc.so.6:__GI_strstr) redirected to 0x4843ca0 (__strstr_sse2)
+--93148-- REDIR: 0x4b39cc0 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x48421e0 (bcmp)
+--93148-- REDIR: 0x4b40b60 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x48428e0 (memset)
+--93148-- REDIR: 0x4a4fe80 (libc.so.6:realloc) redirected to 0x483df30 (realloc)
+--93148-- REDIR: 0x4b3efa0 (libc.so.6:__strncpy_avx2) redirected to 0x483f230 (strncpy)
+--93148-- REDIR: 0x4b3ec10 (libc.so.6:__strcpy_avx2) redirected to 0x483f090 (strcpy)
+==93148== 
+==93148== HEAP SUMMARY:
+==93148==     in use at exit: 0 bytes in 0 blocks
+==93148==   total heap usage: 80,944 allocs, 80,944 frees, 2,831,829 bytes allocated
+==93148== 
+==93148== All heap blocks were freed -- no leaks are possible
+==93148== 
+==93148== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+--93148-- 
+--93148-- used_suppression:      1 X on SUSE11 writev uninit padding /usr/lib/x86_64-linux-gnu/valgrind/default.supp:397
+==93148== 
+==93148== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

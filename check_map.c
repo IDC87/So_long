@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 12:47:22 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/29 18:42:07 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/30 00:00:59 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,18 @@ void error_free_m(t_tudo *tudo, char *text)
     ft_printf("%s", text);
     free(tudo->mlx_init);
     free_map(tudo->map.full_map);
+    //free_map(tudo->map.tmp_grid);
     exit(0);
 }
 
+
+
 void check_map(t_tudo *tudo)
 {
+    check_chars(tudo, tudo->map.full_map);
     check_number_of_sprites(tudo);
-    wall_check(tudo); 
+    wall_check(tudo);
+    
 }
     
 void wall_check(t_tudo *tudo)
@@ -63,43 +68,50 @@ void check_number_of_sprites(t_tudo *tudo)
     loop_number_of_sprites(tudo);
     loop_grid(tudo);    
     if (tudo->exit_count != 1)
-      error_free_m(tudo, "Wrong number of Exits\n");    
+    {
+        free_map(tudo->map.full_map);
+        free_map(tudo->map.tmp_grid);
+        error("Must have only one exit\n");    
+    }
     if (tudo->player_count != 1)
-      error_free_m(tudo, "Must have only 1 Player start\n");
+    {
+      free_map(tudo->map.full_map);
+      free_map(tudo->map.tmp_grid); 
+      error("Must have only 1 Player start\n");
+    }
     if (tudo->collectible_count == 0)
-      error_free_m(tudo, "Must have at least one collectible\n");
+    {
+        free_map(tudo->map.full_map);
+        free_map(tudo->map.tmp_grid);
+        error("Must have at least one collectible\n");
+    }
 }
 
 
 void check_valid_path(t_tudo *tudo)
 {
     int x;
-    int y;
+    int y;    
     
-
     loop_grid(tudo);
     loop_grid_collectible(tudo);    
     y = tudo->indexs.i;
-    x = tudo->indexs.j;
-    ft_printf("start x %d\n", x);
-    ft_printf("start y %d\n", y);
-    
+    x = tudo->indexs.j;    
     tudo->collectible_debug_count = tudo->collectible_total;
-    ft_validmap_check(tudo, x, y);   
-    
-    
+    ft_validmap_check(tudo, x, y);     
     ft_printf("Collectible debug: %d\n", tudo->collectible_debug_count);
-    //ft_printf("Collectible debug total: %d\n", tudo->collectible_total);
-    ft_printf("exit debug total: %d\n", tudo->exit_count);
-    
+    ft_printf("exit debug total: %d\n", tudo->exit_count);    
     if (tudo->collectible_debug_count != 0 || tudo->exit_count != 1)
     {
         free_map(tudo->map.tmp_grid);
-		error("Error! There isn't valid way to go exit.\n");
+        free_map(tudo->map.full_map);
+		error("There isn't a valid way to go exit.\n");
     }
       else
-        ft_printf("valid path");
+        ft_printf("valid path\n");
     free_map(tudo->map.tmp_grid);
+    ft_printf("counts: %d\n", tudo->exit_count);
+    tudo->collectible_total = 0;    
 }
 
 void	ft_validmap_check(t_tudo *tudo, int x, int y)
@@ -111,18 +123,18 @@ void	ft_validmap_check(t_tudo *tudo, int x, int y)
 	{
 		if (tudo->map.tmp_grid[y][x] == 'C')
 			tudo->collectible_debug_count--;
-		tudo->map.tmp_grid[y][x] = '.';
+		tudo->map.tmp_grid[y][x] = 'V';
 		if (tudo->map.tmp_grid[y][x + 1] != '1' &&
-			tudo->map.tmp_grid[y][x + 1] != '.')
+			tudo->map.tmp_grid[y][x + 1] != 'V')
 			ft_validmap_check(tudo, x + 1, y);
 		if (tudo->map.tmp_grid[y][x - 1] != '1' &&
-			tudo->map.tmp_grid[y][x - 1] != '.')
+			tudo->map.tmp_grid[y][x - 1] != 'V')
 			ft_validmap_check(tudo, x - 1, y);
 		if (tudo->map.tmp_grid[y - 1][x] != '1' &&
-			tudo->map.tmp_grid[y - 1][x] != '.')
+			tudo->map.tmp_grid[y - 1][x] != 'V')
 			ft_validmap_check(tudo, x, y - 1);
 		if (tudo->map.tmp_grid[y + 1][x] != '1' &&
-			tudo->map.tmp_grid[y + 1][x] != '.')
+			tudo->map.tmp_grid[y + 1][x] != 'V')
 			ft_validmap_check(tudo, x, y + 1);
 	}
 }

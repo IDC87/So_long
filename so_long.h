@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:12:20 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/29 17:36:17 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/30 00:14:56 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ int	nbr_tokens(char const *s, char delimeter);
 char	*token(const char *s, int columns, int index);
 char	**words_divider(char const *s, char **words, char delimeter, int len);
 char	**ft_split(char const *s, char delimeter);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 int		len(long nb);
 char	*ft_itoa(int nb);
@@ -126,7 +125,7 @@ void loop_map_grid(t_tudo *tudo);
 void loop_grid(t_tudo *tudo);
 void loop_grid_collectible(t_tudo *tudo);
 
-void create_map(char *filename,int fd, t_tudo *tudo);
+void import_map(char *filename,int fd, t_tudo *tudo);
 void check_map(t_tudo *tudo);
 int exit_game(t_tudo *tudo);
 void free_map(char **map);
@@ -136,7 +135,10 @@ void insert_sprites(t_tudo *tudo, int i, int j);
 void loop_number_of_sprites(t_tudo *tudo);
 void check_number_of_sprites(t_tudo *tudo);
 void wall_check(t_tudo *tudo);
+void check_chars(t_tudo *tudo, char **s);
 void check_valid_path(t_tudo *tudo);
+void initialize_variables(t_tudo *tudo);
 void	ft_validmap_check(t_tudo *tudo, int x, int y);
+void check_gaps( char *buf, int bytes);
 
 #endif

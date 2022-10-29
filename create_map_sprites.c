@@ -6,55 +6,81 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:30:09 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/10/29 18:39:31 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/10/30 00:42:57 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void create_map(char *filename, int fd, t_tudo *tudo)
+void process_map(t_tudo *tudo, char *buf, size_t bytes)
+{
+    tudo->map.full_map = ft_split(buf, '\n');
+    tudo->map.tmp_grid = ft_split(buf, '\n');
+    free(buf);      
+    tudo->map.width = ft_strlen_long(tudo->map.full_map[0]);
+    tudo->map.height  = bytes / tudo->map.width;
+    if (tudo->map.width < tudo->map.height)
+        tudo->map.height --;     
+}
+
+void import_map(char *filename, int fd, t_tudo *tudo)
 {
     size_t bytes_read;
     char *buf;
     
-    fd = open(filename, O_RDONLY);   
+    fd = open(filename, O_RDONLY); 
     buf = (char *)malloc(sizeof(char) * BUFFER_COUNT);
-    if(!buf || fd < 0)
+    if(!buf || fd <= 0)
     {
         free(buf);
+        close(fd); 
         error("No such file or directory\n");       
     }
     bytes_read = read(fd, buf, BUFFER_COUNT);
-    ft_printf("number of bytes %d\n", bytes_read);
+    check_gaps( buf, bytes_read);
+    ft_printf("ALARMA %d\n", bytes_read);
     if (bytes_read <= 14)
     {
         free(buf);
+        close(fd); 
         error("File empty or too small to be aceptable\n");        
     }
-    buf[bytes_read] = '\0';    
-    tudo->map.full_map = ft_split(buf, '\n');
-    tudo->map.tmp_grid = ft_split(buf, '\n');
-    free(buf);    
-    close(fd); 
-    tudo->map.width = ft_strlen_long(tudo->map.full_map[0]);
-    tudo->map.height  = bytes_read / tudo->map.width;
-    if (tudo->map.width < tudo->map.height)
-        tudo->map.height --;     
+    buf[bytes_read] = '\0';
+    close(fd);    
+    process_map(tudo, buf, bytes_read);    
 }
+
+void check_gaps( char *buf, int bytes)
+{
+    int i;
+
+    i = 0;
+    while(i < bytes)
+    {
+      if ((buf[i] == '\n' && buf[i + 1] == '\n') \
+      || buf[0] == '\n' || buf[bytes - 1] == '\n')
+      {
+        free(buf);
+        error("Map cannot have gaps &/or empty lines!\n");
+      }
+       i++;
+    }    
+}
+
 
 t_sprites create_sprites(void *mlx_init)
 {
     int x;
     int y;
-    t_sprites img;
+    t_sprites sprite;
     
-    img.sapo1 = mlx_xpm_file_to_image(mlx_init, sapinho, &x, &y);
-    img.grass1 = mlx_xpm_file_to_image(mlx_init, grass, &x, &y);
-    img.wall1 = mlx_xpm_file_to_image(mlx_init, wall, &x, &y);
-    img.exit1 = mlx_xpm_file_to_image(mlx_init, player_exit, &x, &y);
-    img.collectible1 = mlx_xpm_file_to_image(mlx_init, player_collectible, &x, &y);
-    img.polluted_water = mlx_xpm_file_to_image(mlx_init, polluted_lake, &x, &y);
-    return (img);
+    sprite.sapo1 = mlx_xpm_file_to_image(mlx_init, sapinho, &x, &y);
+    sprite.grass1 = mlx_xpm_file_to_image(mlx_init, grass, &x, &y);
+    sprite.wall1 = mlx_xpm_file_to_image(mlx_init, wall, &x, &y);
+    sprite.exit1 = mlx_xpm_file_to_image(mlx_init, player_exit, &x, &y);
+    sprite.collectible1 = mlx_xpm_file_to_image(mlx_init, player_collectible, &x, &y);
+    sprite.polluted_water = mlx_xpm_file_to_image(mlx_init, polluted_lake, &x, &y);
+    return (sprite);
 }
 
 void insert_sprites(t_tudo *tudo, int i, int j)
