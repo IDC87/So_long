@@ -23,6 +23,18 @@
         },
         {
             "path": "../../scrypto-demos"
+        },
+        {
+            "path": "../../libft"
+        },
+        {
+            "path": "../../get_next_line"
+        },
+        {
+            "path": "../../ft_printf"
+        },
+        {
+            "path": "../../backup_solong"
         }
     ],
     "settings": {}

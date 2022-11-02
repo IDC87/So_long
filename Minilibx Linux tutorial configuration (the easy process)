@@ -23,6 +23,7 @@ I took too long to have this working so i decided to create a simpler one.
     4.1 WARNING! if libraries could not be found please run this command:  - sudo apt-get install libc6-dev 
 
 5. Run these commands: (outside of the minilbx folder)
+   (this step is only required if you want to have the library always installed in your pc)
 
 	sudo mv minilibx-linux/man/man1 /usr/local/man/
 	sudo mv minilibx-linux/libmlx.a /usr/local/lib/
