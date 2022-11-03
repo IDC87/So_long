@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_bonus.h                                    :+:      :+:    :+:   */
+/*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:12:20 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/11/03 12:18:04 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:33:01 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_BONUS_H
-# define SO_LONG_BONUS_H 
+#ifndef SO_LONG_H
+# define SO_LONG_H 
 
 # include "../minilibx-linux/mlx.h"
 //# include <mlx.h>
-# include "../libft/libft.h"
+# include "./libft/libft.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h> 
@@ -66,7 +66,6 @@ typedef struct s_tudo
 	t_indexs	indexs;
 	void		*mlx_init;
 	void		*mlx_window;
-	char		*str_put;
 	int			collectible_total;
 	int			collectible_count;
 	int			collectible_debug_count;

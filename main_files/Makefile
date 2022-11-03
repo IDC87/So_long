@@ -32,13 +32,13 @@ valgrind = --leak-check=full \
 
 MLX_HOME = -lbsd -lmlx -lXext -lX11
 
-MLX_42 = -L./minilibx-linux -lbsd -lmlx -lXext -lX11
+MLX_42 = -L../minilibx-linux -lbsd -lmlx -lXext -lX11
 
 INCLUDES = -I ./libft -I ./mlx
 
 I_BONUS = so_long_bonus.h
 
-MLX_LIB = ./minilibx-linux
+MLX_LIB = ../minilibx-linux
 
 LIBFT_A = ./libft/libft.a
 
