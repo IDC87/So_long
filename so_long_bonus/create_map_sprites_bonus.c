@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_map_sprites.c                               :+:      :+:    :+:   */
+/*   create_map_sprites_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:30:09 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/11/03 00:39:23 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/11/03 00:52:57 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	keyboard(int keycode, t_tudo *tudo)
 {
@@ -31,17 +31,17 @@ t_sprites	create_sprites(void *mlx_init)
 {
 	int			x;
 	int			y;
-	t_sprites	img;
+	t_sprites	im;
 
-	img.sapo1 = mlx_xpm_file_to_image(mlx_init, "./sprites/player.xpm", &x, &y);
-	img.grass1 = mlx_xpm_file_to_image(mlx_init, "./sprites/grass.xpm", &x, &y);
-	img.wall1 = mlx_xpm_file_to_image(mlx_init, "./sprites/wall.xpm", &x, &y);
-	img.exit1 = mlx_xpm_file_to_image(mlx_init, "./sprites/exit.xpm", &x, &y);
-	img.collectible1 = \
+	im.sapo1 = mlx_xpm_file_to_image(mlx_init, "./sprites/player.xpm", &x, &y);
+	im.grass1 = mlx_xpm_file_to_image(mlx_init, "./sprites/grass.xpm", &x, &y);
+	im.wall1 = mlx_xpm_file_to_image(mlx_init, "./sprites/wall.xpm", &x, &y);
+	im.exit1 = mlx_xpm_file_to_image(mlx_init, "./sprites/exit.xpm", &x, &y);
+	im.collectible1 = \
 	mlx_xpm_file_to_image(mlx_init, "./sprites/collectible.xpm", &x, &y);
-	img.polluted_water = \
+	im.polluted_water = \
 	mlx_xpm_file_to_image(mlx_init, "./sprites/lake_pollu.xpm", &x, &y);
-	return (img);
+	return (im);
 }
 
 void	insert_sprites(t_tudo *tudo, int i, int j)
@@ -78,6 +78,7 @@ void	move_sprite(t_tudo *tudo, int x, int y)
 	tudo->map.full_map[tudo->indexs.i + x][tudo->indexs.j + y] != 'E')
 	{
 		tudo->move_count++;
+		put_string(tudo);
 		if (tudo->map.full_map[tudo->indexs.i + x][tudo->indexs.j + y] == 'F')
 		{
 			ft_printf("//////Congratulations, you finish the game with");
@@ -92,4 +93,16 @@ void	move_sprite(t_tudo *tudo, int x, int y)
 			tudo->map.full_map[tudo->indexs.exit_i][tudo->indexs.exit_j] = 'F';
 		loop_map_grid(tudo);
 	}
+}
+
+void	put_string(t_tudo *tudo)
+{
+	tudo->str_put = ft_itoa(tudo->move_count);
+	if (tudo->move_count != 0)
+		mlx_clear_window(tudo->mlx_init, tudo->mlx_window);
+	mlx_string_put(tudo->mlx_init, tudo->mlx_window, tudo->map.width, \
+	tudo->map.height * 44 + 22, GOLD, "Number of moves:");
+	mlx_string_put(tudo->mlx_init, tudo->mlx_window, tudo->map.width + 110, \
+	tudo->map.height * 44 + 22, GOLD, tudo->str_put);
+	free(tudo->str_put);
 }

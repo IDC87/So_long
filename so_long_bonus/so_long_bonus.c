@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/22 16:30:43 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/11/03 00:39:36 by ivda-cru         ###   ########.fr       */
+/*   Created: 2022/11/02 22:29:05 by ivda-cru          #+#    #+#             */
+/*   Updated: 2022/11/03 00:36:15 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	process_map(t_tudo *tudo, char *buf, size_t bytes)
 {
@@ -55,7 +55,7 @@ void	initialize_game(t_tudo *tudo)
 	int	win_y;
 
 	win_x = tudo->map.width * SPRITE_RES_X_Y;
-	win_y = tudo->map.height * SPRITE_RES_X_Y;
+	win_y = tudo->map.height * SPRITE_RES_X_Y + MOVE_ROW;
 	tudo->mlx_init = mlx_init();
 	tudo->mlx_window = mlx_new_window(tudo->mlx_init, win_x, win_y, "So_long");
 	loop_grid_collectible(tudo);

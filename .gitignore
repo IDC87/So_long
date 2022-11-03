@@ -1,0 +1,8 @@
+.vscode
+.DS_Store
+out
+so_long
+#map.ber
+*.o
+*.
+valgrind-out.txt
