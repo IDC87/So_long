@@ -4,5 +4,5 @@ out
 so_long
 #map.ber
 *.o
-*.
+#*.
 valgrind-out.txt

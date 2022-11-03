@@ -6,15 +6,15 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:12:20 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/11/03 00:19:19 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/11/03 12:18:04 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H 
 
-//# include "./minilibx-linux/mlx.h"
-# include <mlx.h>
+# include "../minilibx-linux/mlx.h"
+//# include <mlx.h>
 # include "../libft/libft.h"
 # include <sys/types.h>
 # include <sys/stat.h>

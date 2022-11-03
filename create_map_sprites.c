@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:30:09 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/11/03 00:39:23 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:25:18 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	move_sprite(t_tudo *tudo, int x, int y)
 	tudo->map.full_map[tudo->indexs.i + x][tudo->indexs.j + y] != 'E')
 	{
 		tudo->move_count++;
+		ft_printf("Number of moves: %d\n", tudo->move_count);
 		if (tudo->map.full_map[tudo->indexs.i + x][tudo->indexs.j + y] == 'F')
 		{
 			ft_printf("//////Congratulations, you finish the game with");

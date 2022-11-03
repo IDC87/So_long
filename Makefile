@@ -38,11 +38,13 @@ INCLUDES = -I ./libft -I ./mlx
 
 I_BONUS = so_long_bonus.h
 
+MLX_LIB = ./minilibx-linux
+
 LIBFT_A = ./libft/libft.a
 
 LIBFT_DIR = ./libft
 
-MAPS = Maps/bfs_map.ber	
+MAPS = Maps/map2.ber	
 
 OBJS = $(SRCS:%.c=%.o)
 BOBJS = $(BONUS:%.c=%.o)       
@@ -51,11 +53,13 @@ all: $(NAME)
 
 $(NAME) : $(OBJS)
 	@make all -C $(LIBFT_DIR) --no-print-directory
-	@$(CC) -o $(NAME) $(OBJS) $(LIBFT_A) $(MLX_HOME)
+	@make -C $(MLX_LIB) --no-print-directory
+	@$(CC) -o $(NAME) $(OBJS) $(LIBFT_A) $(MLX_42)
 
 bonus : $(BOBJS)
 	@make all -C $(LIBFT_DIR) --no-print-directory
-	@$(CC) -o $(NAME) $(BOBJS) $(LIBFT_A) $(MLX_HOME)
+	@make -C $(MLX_LIB) --no-print-directory
+	@$(CC) -o $(NAME) $(BOBJS) $(LIBFT_A) $(MLX_42)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c -o $@  $<
@@ -65,10 +69,11 @@ bonus : $(BOBJS)
 clean:
 	@rm -f $(OBJS)
 	@rm -f $(BOBJS)
+	@make clean -C $(MLX_LIB) --no-print-directory
 	@make clean -C $(LIBFT_DIR) --no-print-directory
 
 fclean:	clean
-		@rm -f $(NAME)
+		@rm -f $(NAME)		
 		@make fclean -C $(LIBFT_DIR) --no-print-directory
 		@echo ">>>>FILE $(NAME) & Objects DELETED!<<<<"
 

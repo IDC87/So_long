@@ -6,7 +6,7 @@
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:30:43 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/11/03 00:39:36 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:05:59 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	process_map(t_tudo *tudo, char *buf, size_t bytes)
 {
+	int	i;
+
+	i = 0;
 	tudo->map.full_map = ft_split(buf, '\n');
 	tudo->map.tmp_grid = ft_split(buf, '\n');
 	free(buf);
@@ -21,6 +24,13 @@ void	process_map(t_tudo *tudo, char *buf, size_t bytes)
 	tudo->map.height = bytes / tudo->map.width;
 	if (tudo->map.width < tudo->map.height)
 		tudo->map.height --;
+	while (i < tudo->map.height - 1)
+	{
+		if (ft_strlen(tudo->map.full_map[i]) != \
+		ft_strlen(tudo->map.full_map[i + 1]))
+			error_and_free(tudo, "Map format is invalid!\n");
+		i++;
+	}
 }
 
 void	import_map(char *filename, int fd, t_tudo *tudo)
