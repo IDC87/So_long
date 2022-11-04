@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   check_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ivda-cru <ivda-cru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 12:47:22 by ivda-cru          #+#    #+#             */
-/*   Updated: 2022/11/03 00:40:50 by ivda-cru         ###   ########.fr       */
+/*   Updated: 2022/11/04 16:07:15 by ivda-cru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	check_valid_path(t_tudo *tudo)
 	y = tudo->indexs.i;
 	x = tudo->indexs.j;
 	tudo->collectible_debug_count = tudo->collectible_total;
+	tudo->exit_count = 0;
 	nodes_vector(tudo, x, y);
 	if (tudo->collectible_debug_count != 0 || tudo->exit_count != 1)
 	{
