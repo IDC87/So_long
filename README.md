@@ -14,3 +14,4 @@ INSTALL ON LINUX (only working version for now)
 
 4 . <tt>make play</tt> 
 
+- to play just use the WASD keys. to exit just pres ESC or close the windows with mouse normally.
