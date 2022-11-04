@@ -1,6 +1,7 @@
 # So_long
 2D game project for 42 School using the proprietary MLX library
 
+![My Image](So_long_sample.jpg)
 
 INSTALL ON LINUX (only working version for now)
 
