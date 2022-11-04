@@ -17,13 +17,14 @@ INSTALL ON LINUX (only working version for now)
 - to play just use the WASD keys. to exit just pres ESC or close the windows with mouse normally.
 <br> 
 <br> 
-<b> <font size="8"> CONFIGURING MLX in Linux (Ubunt and mint)</font></b>
+<b> <font size="7"> CONFIGURING MLX in Linux (Ubunt and mint)</font></b><br>
+<i> (just for people who are starting this project)</i>
 <br>
 <br> 
 This is a simple tutorial i have made from all the other tutorials i saw spread in the internet(mostly from github). With the purpose to guide through the process of working with the Minilibx library in Linux.
 I took too long to have this working so i decided to create a simpler one.
 <br><br> 
-1. git clone https://github.com/42Paris/minilibx-linux
+1. <tt>git clone https://github.com/42Paris/minilibx-linux</tt>
 <br><br> 
  Requirements for Linux
 
@@ -34,23 +35,23 @@ I took too long to have this working so i decided to create a simpler one.
     XShm extension must be present (package libxext-dev)
     Utility functions from BSD systems - development files (package libbsd-dev)
 
-2. sudo apt-get install libxext-dev libxrandr-dev libx11-dev libbsd-dev libssl-dev
+2. <tt>sudo apt-get install libxext-dev libxrandr-dev libx11-dev libbsd-dev libssl-dev</tt>
 
-3. cd minilibx-linux
+3. <tt>cd minilibx-linux</tt>
 
-4. ./configure (to run the script and create the minilibx.a(s))
+4. <tt>./configure</tt> (to run the script and create the minilibx.a(s))
 
     4.1 WARNING! if libraries could not be found please run this command:  - sudo apt-get install libc6-dev 
 
 5. Run these commands: (outside of the minilbx folder)
    (this step is only required if you want to have the library always installed in your pc)
 
-	sudo mv minilibx-linux/man/man1 /usr/local/man/
-	sudo mv minilibx-linux/libmlx.a /usr/local/lib/
-	sudo mv minilibx-linux/mlx.h /usr/local/include/
+	<tt>sudo mv minilibx-linux/man/man1 /usr/local/man/</tt><br><br> 
+	<tt>sudo mv minilibx-linux/libmlx.a /usr/local/lib/</tt><br><br> 
+	<tt>sudo mv minilibx-linux/mlx.h /usr/local/include/</tt><br><br> 
 
 6. compile example 
- (clang or gcc) -Wall -Wextra -Werror main.c -lbsd -lmlx -lXext -lX11
+ <tt>gcc -Wall -Wextra -Werror main.c -lbsd -lmlx -lXext -lX11</tt>
 
  !!you need to have already created a main.c file for this last step to work!!
 
