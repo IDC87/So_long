@@ -46,6 +46,17 @@ LIBFT_DIR = ./libft
 
 MAPS = Maps/map2.ber	
 
+BOLD	:= \033[1m
+BLACK	:= \033[30;1m
+RED		:= \033[31;1m
+GREEN	:= \033[32;1m
+YELLOW	:= \033[33;1m
+BLUE	:= \033[34;1m
+MAGENTA	:= \033[35;1m
+CYAN	:= \033[36;1m
+WHITE	:= \033[37;1m
+RESET	:= \033[0m
+
 OBJS = $(SRCS:%.c=%.o)
 BOBJS = $(BONUS:%.c=%.o)       
 
@@ -60,6 +71,17 @@ bonus : $(BOBJS)
 	@make all -C $(LIBFT_DIR) --no-print-directory
 	@make -C $(MLX_LIB) --no-print-directory
 	@$(CC) -o $(NAME) $(BOBJS) $(LIBFT_A) $(MLX_42)
+
+install : $(BOBJS)
+	@sudo apt update && sudo apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev -y
+	@make all -C $(LIBFT_DIR) --no-print-directory
+	@make -C $(MLX_LIB) --no-print-directory
+	@$(CC) -o $(NAME) $(BOBJS) $(LIBFT_A) $(MLX_42)
+	@make clean
+	@echo
+	@echo "$(GREEN)>>>>SOURCE FILES, $(NAME) EXEC AND X11 PACKAGES SUCESSUFUL INSTALLED!<<<<"
+	@echo "$(MAGENTA)made by IDC87"
+	@echo
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c -o $@  $<
@@ -86,8 +108,8 @@ valgrind:	$(NAME)
 		valgrind $(valgrind) ./$(NAME) $(MAPS)
 		
 
-test:
-	$(CC) $(CFLAGS) $(SRCS) $(MLX) $(LIBFT) #&& ./a.out Maps/map2.ber
+play:
+	./so_long Maps/map2.ber
 
 #$(shell find ./mainfiles/ -name "*.c")
 #$(CC) -g -std=c11 $(CFLAGS) -ggdb3 $(INCLUDES) $(SRCS) $(LIBFT) $(MLX) && valgrind $(valgrind) ./a.out $(MAPS)
