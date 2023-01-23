@@ -3,6 +3,8 @@
 
 ![My Image](So_long_sample.jpg)
 
+![](so_long_demonstration.gif)
+
 <b>INSTALL ON LINUX</b> (only working version for now)
 
 - open a terminal window and paste these commands in order:
